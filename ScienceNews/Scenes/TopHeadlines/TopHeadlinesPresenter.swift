@@ -23,15 +23,14 @@ class TopHeadlinesPresenter: TopHeadlinesPresentationLogic {
 
     func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response) {
         
-        let articles = response.articles?.map({ (article) -> TopHeadlines.Article in
+        let articles = response.articles?.enumerated().map({ (index, article) -> TopHeadlines.Article in
             var modifiedArticle = article
             let date = article.publishDate?.asDate.stringForDate(withFormat: "dd.MMMM yyyy")
-            print("data", date)
             modifiedArticle.publishDate = date
+            modifiedArticle.id = index
             return modifiedArticle
         })
 
-        print("LIST", articles)
         
         let viewModel = TopHeadlines.FetchTopHeadlines.ViewModel(headlines: articles)
         viewController?.displayTopHeadlines(viewModel: viewModel)
@@ -59,3 +58,8 @@ extension Date {
 
 
 let currentTimezone = NSTimeZone(abbreviation: "GMT+6:00") as TimeZone?
+
+
+
+
+

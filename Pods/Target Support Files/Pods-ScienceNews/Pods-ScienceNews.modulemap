@@ -1,0 +1,6 @@
+framework module Pods_ScienceNews {
+  umbrella header "Pods-ScienceNews-umbrella.h"
+
+  export *
+  module * { export * }
+}

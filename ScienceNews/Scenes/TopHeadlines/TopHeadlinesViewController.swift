@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol TopHeadlinesDisplayLogic: class {
     func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel)
@@ -95,8 +96,19 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
             cell.articleDescription.text = article.description
             cell.publishDate.text = article.publishDate
             cell.author.text = article.author
+            if let url = URL(string: article.imageUrl ?? "") {
+                cell.articleImg.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
+            }
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("DINARA", headlines?.count, "\nIndex", headlines?[indexPath.row].id)
+        guard let headlineList = headlines else { return }
+        if indexPath.row == headlineList.count - 1 {
+            print("RELOADDDDD")
+        }
     }
     
 }

@@ -16,11 +16,17 @@ class TopHeadlinesWorker {
     
     func fetchTopHeadlines(completionHandler: @escaping ([TopHeadlines.Article]?) -> Void) {
         var transactionHistoryList = TopHeadlines.ArticleList(articles: [TopHeadlines.Article]())
-        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=e65ee0938a2a43ebb15923b48faed18d") else { return }
+//        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=e65ee0938a2a43ebb15923b48faed18d") else { return }
         
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        var components = URLComponents(string: "https://newsapi.org/v2/top-headlines?")!
+        components.queryItems = [
+            URLQueryItem(name: "country", value: "us"), URLQueryItem(name: "category", value: "science"), URLQueryItem(name: "apiKey", value: "e65ee0938a2a43ebb15923b48faed18d"), URLQueryItem(name: "pageSize", value: "15"), URLQueryItem(name: "page", value: "1")
+        ]
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        let request = URLRequest(url: components.url!)
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let dataObject = data else { return }
-            print("DATA_PBJ", dataObject)
             do {
                 let decoder = JSONDecoder()
                 transactionHistoryList = try decoder.decode(TopHeadlines.ArticleList.self, from: dataObject)

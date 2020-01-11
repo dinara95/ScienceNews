@@ -33,6 +33,7 @@ enum TopHeadlines {
         var imageUrl: String?
         var publishDate: String?
         var content: String?
+        var id: Int?
         
         private enum CodingKeys: String, CodingKey {
             case title

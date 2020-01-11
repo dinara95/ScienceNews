@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		483C95EEDCC4895FFA58285E /* Pods_ScienceNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF648017B7DEB21164AD0C60 /* Pods_ScienceNews.framework */; };
 		D31072C923C9C58200BE86DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072C823C9C58200BE86DD /* AppDelegate.swift */; };
 		D31072CE23C9C58200BE86DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31072CC23C9C58200BE86DD /* Main.storyboard */; };
 		D31072D023C9C58300BE86DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D31072CF23C9C58300BE86DD /* Assets.xcassets */; };
@@ -21,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A20097C3F0269FEAAFC2DE9 /* Pods-ScienceNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScienceNews.debug.xcconfig"; path = "Target Support Files/Pods-ScienceNews/Pods-ScienceNews.debug.xcconfig"; sourceTree = "<group>"; };
+		1E7D417628A02280B4D1CC18 /* Pods-ScienceNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScienceNews.release.xcconfig"; path = "Target Support Files/Pods-ScienceNews/Pods-ScienceNews.release.xcconfig"; sourceTree = "<group>"; };
+		BF648017B7DEB21164AD0C60 /* Pods_ScienceNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScienceNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31072C523C9C58200BE86DD /* ScienceNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScienceNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D31072C823C9C58200BE86DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D31072CD23C9C58200BE86DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,17 +45,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				483C95EEDCC4895FFA58285E /* Pods_ScienceNews.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		80325ACD324649053A789751 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0A20097C3F0269FEAAFC2DE9 /* Pods-ScienceNews.debug.xcconfig */,
+				1E7D417628A02280B4D1CC18 /* Pods-ScienceNews.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		96C3B18F903C4AC0524205C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF648017B7DEB21164AD0C60 /* Pods_ScienceNews.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D31072BC23C9C58200BE86DD = {
 			isa = PBXGroup;
 			children = (
 				D31072C723C9C58200BE86DD /* ScienceNews */,
 				D31072C623C9C58200BE86DD /* Products */,
+				80325ACD324649053A789751 /* Pods */,
+				96C3B18F903C4AC0524205C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,9 +138,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D31072D723C9C58300BE86DD /* Build configuration list for PBXNativeTarget "ScienceNews" */;
 			buildPhases = (
+				DDA0C3EB3B5289D26340174B /* [CP] Check Pods Manifest.lock */,
 				D31072C123C9C58200BE86DD /* Sources */,
 				D31072C223C9C58200BE86DD /* Frameworks */,
 				D31072C323C9C58200BE86DD /* Resources */,
+				1C1FCAED7F5C2F2AF24A89D3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -171,6 +198,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C1FCAED7F5C2F2AF24A89D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ScienceNews/Pods-ScienceNews-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ScienceNews/Pods-ScienceNews-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScienceNews/Pods-ScienceNews-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDA0C3EB3B5289D26340174B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScienceNews-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D31072C123C9C58200BE86DD /* Sources */ = {
@@ -328,6 +397,7 @@
 		};
 		D31072D823C9C58300BE86DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A20097C3F0269FEAAFC2DE9 /* Pods-ScienceNews.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -346,6 +416,7 @@
 		};
 		D31072D923C9C58300BE86DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7D417628A02280B4D1CC18 /* Pods-ScienceNews.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
