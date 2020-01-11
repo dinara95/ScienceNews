@@ -12,20 +12,41 @@
 
 import UIKit
 
-enum TopHeadlines
-{
+enum TopHeadlines {
   // MARK: Use cases
   
-  enum Something
-  {
-    struct Request
-    {
+    enum FetchTopHeadlines {
+        struct Request {
+        }
+        struct Response {
+            var articles: [Article]?
+        }
+        struct ViewModel {
+            var headlines: [Article]?
+        }
     }
-    struct Response
-    {
+    
+    struct Article: Codable {
+        var title: String?
+        var author: String?
+        var description: String?
+        var imageUrl: String?
+        var publishDate: String?
+        var content: String?
+        
+        private enum CodingKeys: String, CodingKey {
+            case title
+            case author
+            case description
+            case imageUrl = "urlToImage"
+            case publishDate = "publishedAt"
+            case content
+        }
     }
-    struct ViewModel
-    {
+    
+    struct ArticleList: Codable {
+        var articles: [Article]?
     }
-  }
+    
+    
 }

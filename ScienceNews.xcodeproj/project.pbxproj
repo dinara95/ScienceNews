@@ -17,6 +17,7 @@
 		D31072E523C9C71A00BE86DD /* TopHeadlinesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072DF23C9C71A00BE86DD /* TopHeadlinesModels.swift */; };
 		D31072E623C9C71A00BE86DD /* TopHeadlinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E023C9C71A00BE86DD /* TopHeadlinesViewController.swift */; };
 		D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E123C9C71A00BE86DD /* TopHeadlinesInteractor.swift */; };
+		D31072EA23C9EA8300BE86DD /* HeadlinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E923C9EA8300BE86DD /* HeadlinesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		D31072DF23C9C71A00BE86DD /* TopHeadlinesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlinesModels.swift; sourceTree = "<group>"; };
 		D31072E023C9C71A00BE86DD /* TopHeadlinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlinesViewController.swift; sourceTree = "<group>"; };
 		D31072E123C9C71A00BE86DD /* TopHeadlinesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlinesInteractor.swift; sourceTree = "<group>"; };
+		D31072E923C9EA8300BE86DD /* HeadlinesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlinesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,14 +87,23 @@
 		D31072DB23C9C6E000BE86DD /* TopHeadlines */ = {
 			isa = PBXGroup;
 			children = (
-				D31072DC23C9C71A00BE86DD /* TopHeadlinesPresenter.swift */,
-				D31072DD23C9C71A00BE86DD /* TopHeadlinesWorker.swift */,
-				D31072DE23C9C71A00BE86DD /* TopHeadlinesRouter.swift */,
-				D31072DF23C9C71A00BE86DD /* TopHeadlinesModels.swift */,
+				D31072E823C9EA6400BE86DD /* Views */,
 				D31072E023C9C71A00BE86DD /* TopHeadlinesViewController.swift */,
 				D31072E123C9C71A00BE86DD /* TopHeadlinesInteractor.swift */,
+				D31072DC23C9C71A00BE86DD /* TopHeadlinesPresenter.swift */,
+				D31072DE23C9C71A00BE86DD /* TopHeadlinesRouter.swift */,
+				D31072DF23C9C71A00BE86DD /* TopHeadlinesModels.swift */,
+				D31072DD23C9C71A00BE86DD /* TopHeadlinesWorker.swift */,
 			);
 			path = TopHeadlines;
+			sourceTree = "<group>";
+		};
+		D31072E823C9EA6400BE86DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D31072E923C9EA8300BE86DD /* HeadlinesTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +184,7 @@
 				D31072C923C9C58200BE86DD /* AppDelegate.swift in Sources */,
 				D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */,
 				D31072E323C9C71A00BE86DD /* TopHeadlinesWorker.swift in Sources */,
+				D31072EA23C9EA8300BE86DD /* HeadlinesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

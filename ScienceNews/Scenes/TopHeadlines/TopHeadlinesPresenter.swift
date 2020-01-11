@@ -12,20 +12,50 @@
 
 import UIKit
 
-protocol TopHeadlinesPresentationLogic
-{
-  func presentSomething(response: TopHeadlines.Something.Response)
+protocol TopHeadlinesPresentationLogic {
+    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response)
 }
 
-class TopHeadlinesPresenter: TopHeadlinesPresentationLogic
-{
-  weak var viewController: TopHeadlinesDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: TopHeadlines.Something.Response)
-  {
-    let viewModel = TopHeadlines.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+class TopHeadlinesPresenter: TopHeadlinesPresentationLogic {
+    weak var viewController: TopHeadlinesDisplayLogic?
+
+    // MARK: Present Top Headlines
+
+    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response) {
+        
+        let articles = response.articles?.map({ (article) -> TopHeadlines.Article in
+            var modifiedArticle = article
+            let date = article.publishDate?.asDate.stringForDate(withFormat: "dd.MMMM yyyy")
+            print("data", date)
+            modifiedArticle.publishDate = date
+            return modifiedArticle
+        })
+
+        print("LIST", articles)
+        
+        let viewModel = TopHeadlines.FetchTopHeadlines.ViewModel(headlines: articles)
+        viewController?.displayTopHeadlines(viewModel: viewModel)
+    }
 }
+
+
+extension String {
+    var asDate: Date {
+        let formatter = DateFormatter()
+        formatter.timeZone = currentTimezone
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: self) ?? Date()
+    }
+}
+
+extension Date {
+    func stringForDate(withFormat dateFormat: String) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.timeZone = currentTimezone
+        return dateFormatter.string(from: self)
+    }
+}
+
+
+let currentTimezone = NSTimeZone(abbreviation: "GMT+6:00") as TimeZone?

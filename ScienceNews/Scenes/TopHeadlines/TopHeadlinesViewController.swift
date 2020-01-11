@@ -12,78 +12,91 @@
 
 import UIKit
 
-protocol TopHeadlinesDisplayLogic: class
-{
-  func displaySomething(viewModel: TopHeadlines.Something.ViewModel)
+protocol TopHeadlinesDisplayLogic: class {
+    func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel)
 }
 
-class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic
-{
-  var interactor: TopHeadlinesBusinessLogic?
-  var router: (NSObjectProtocol & TopHeadlinesRoutingLogic & TopHeadlinesDataPassing)?
+class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
+    @IBOutlet weak var tableView: UITableView!
+    
+    var interactor: TopHeadlinesBusinessLogic?
+    var router: (NSObjectProtocol & TopHeadlinesRoutingLogic & TopHeadlinesDataPassing)?
+    var headlines: [TopHeadlines.Article]?
+    
+    // MARK: Object lifecycle
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = TopHeadlinesInteractor()
-    let presenter = TopHeadlinesPresenter()
-    let router = TopHeadlinesRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
     }
-  }
   
-  // MARK: View lifecycle
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
   
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomething()
-  }
+    // MARK: Setup
   
-  // MARK: Do something
+    private func setup() {
+        let viewController = self
+        let interactor = TopHeadlinesInteractor()
+        let presenter = TopHeadlinesPresenter()
+        let router = TopHeadlinesRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
   
-  //@IBOutlet weak var nameTextField: UITextField!
+    // MARK: Routing
   
-  func doSomething()
-  {
-    let request = TopHeadlines.Something.Request()
-    interactor?.doSomething(request: request)
-  }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let scene = segue.identifier {
+          let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+          if let router = router, router.responds(to: selector) {
+            router.perform(selector, with: segue)
+          }
+        }
+    }
   
-  func displaySomething(viewModel: TopHeadlines.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+    // MARK: View lifecycle
+  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        fetchTopHeadlines()
+    }
+  
+    // MARK: Fetch Top Headlines
+  
+    func fetchTopHeadlines() {
+        let request = TopHeadlines.FetchTopHeadlines.Request()
+        interactor?.fetchTopHeadlines(request: request)
+    }
+  
+    func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel) {
+        headlines = viewModel.headlines
+        tableView.reloadData()
+    }
+}
+
+extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return headlines?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "headlineCell", for: indexPath) as! HeadlinesTableViewCell
+        if let article = headlines?[indexPath.row] {
+            cell.title.text = article.title
+            cell.articleDescription.text = article.description
+            cell.publishDate.text = article.publishDate
+            cell.author.text = article.author
+        }
+        return cell
+    }
+    
 }

@@ -12,9 +12,27 @@
 
 import UIKit
 
-class TopHeadlinesWorker
-{
-  func doSomeWork()
-  {
-  }
+class TopHeadlinesWorker {
+    
+    func fetchTopHeadlines(completionHandler: @escaping ([TopHeadlines.Article]?) -> Void) {
+        var transactionHistoryList = TopHeadlines.ArticleList(articles: [TopHeadlines.Article]())
+        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=e65ee0938a2a43ebb15923b48faed18d") else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let dataObject = data else { return }
+            print("DATA_PBJ", dataObject)
+            do {
+                let decoder = JSONDecoder()
+                transactionHistoryList = try decoder.decode(TopHeadlines.ArticleList.self, from: dataObject)
+                DispatchQueue.main.async {
+                    completionHandler(transactionHistoryList.articles)
+                }
+            } catch let error {
+                print("Error decoding TopHeadlines json \(error)")
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }.resume()
+    }
 }

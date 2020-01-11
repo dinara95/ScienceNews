@@ -12,30 +12,25 @@
 
 import UIKit
 
-protocol TopHeadlinesBusinessLogic
-{
-  func doSomething(request: TopHeadlines.Something.Request)
+protocol TopHeadlinesBusinessLogic {
+    func fetchTopHeadlines(request: TopHeadlines.FetchTopHeadlines.Request)
 }
 
-protocol TopHeadlinesDataStore
-{
-  //var name: String { get set }
+protocol TopHeadlinesDataStore {
+    //var name: String { get set }
 }
 
-class TopHeadlinesInteractor: TopHeadlinesBusinessLogic, TopHeadlinesDataStore
-{
-  var presenter: TopHeadlinesPresentationLogic?
-  var worker: TopHeadlinesWorker?
-  //var name: String = ""
+class TopHeadlinesInteractor: TopHeadlinesBusinessLogic, TopHeadlinesDataStore {
+    var presenter: TopHeadlinesPresentationLogic?
+    var worker: TopHeadlinesWorker?
   
-  // MARK: Do something
+    // MARK: Do something
   
-  func doSomething(request: TopHeadlines.Something.Request)
-  {
-    worker = TopHeadlinesWorker()
-    worker?.doSomeWork()
-    
-    let response = TopHeadlines.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    func fetchTopHeadlines(request: TopHeadlines.FetchTopHeadlines.Request) {
+        worker = TopHeadlinesWorker()
+        worker?.fetchTopHeadlines(completionHandler: { (articles) in
+            let response = TopHeadlines.FetchTopHeadlines.Response(articles: articles)
+            self.presenter?.presentTopHeadlines(response: response)
+        })
+    }
 }
