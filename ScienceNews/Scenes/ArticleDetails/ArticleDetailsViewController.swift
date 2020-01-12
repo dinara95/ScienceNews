@@ -79,7 +79,6 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    articleImageView.layer.cornerRadius = 10
     if let articles = selectedArticle {
         articleTitle.text = articles.title
         articleDescription.text = articles.description
@@ -94,7 +93,6 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
     var frame = articleContent.frame
     frame.size.height = articleContent.contentSize.height
     articleContent.frame = frame
-    print("CONTENT", selectedArticle?.content)
     doSomething()
   }
   
