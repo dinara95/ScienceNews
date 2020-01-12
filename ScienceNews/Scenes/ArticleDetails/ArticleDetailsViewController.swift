@@ -34,7 +34,16 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
     @IBOutlet weak var articleContent: UITextView!
     // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    @IBAction func onUrlPress(_ sender: UIButton) {
+        if #available(iOS 10.0, *) {
+            guard let url = URL(string: selectedArticle?.articleUrl ?? "") else { return }
+            UIApplication.shared.open(url)
+        } else {
+            guard let url = URL(string: selectedArticle?.articleUrl ?? "") else { return }
+            UIApplication.shared.openURL(url)
+        }
+    }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
