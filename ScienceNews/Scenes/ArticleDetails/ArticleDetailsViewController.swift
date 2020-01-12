@@ -34,7 +34,16 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
     @IBOutlet weak var articleContent: UITextView!
     // MARK: Object lifecycle
   
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    @IBAction func onUrlPress(_ sender: UIButton) {
+        if #available(iOS 10.0, *) {
+            guard let url = URL(string: selectedArticle?.articleUrl ?? "") else { return }
+            UIApplication.shared.open(url)
+        } else {
+            guard let url = URL(string: selectedArticle?.articleUrl ?? "") else { return }
+            UIApplication.shared.openURL(url)
+        }
+    }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
   {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     setup()
@@ -79,7 +88,6 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    articleImageView.layer.cornerRadius = 10
     if let articles = selectedArticle {
         articleTitle.text = articles.title
         articleDescription.text = articles.description
@@ -94,7 +102,6 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
     var frame = articleContent.frame
     frame.size.height = articleContent.contentSize.height
     articleContent.frame = frame
-    print("CONTENT", selectedArticle?.content)
     doSomething()
   }
   

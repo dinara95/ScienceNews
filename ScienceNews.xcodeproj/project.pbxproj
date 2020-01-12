@@ -19,6 +19,7 @@
 		D31072E623C9C71A00BE86DD /* TopHeadlinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E023C9C71A00BE86DD /* TopHeadlinesViewController.swift */; };
 		D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E123C9C71A00BE86DD /* TopHeadlinesInteractor.swift */; };
 		D31072EA23C9EA8300BE86DD /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E923C9EA8300BE86DD /* ArticleCell.swift */; };
+		D371865923CBAAA900E29C93 /* PagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D371865823CBAAA900E29C93 /* PagingTableViewController.swift */; };
 		D3DDE73923CAFAF00036B6CA /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */; };
 		D3DDE73A23CAFAF00036B6CA /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */; };
 		D3DDE74A23CB32420036B6CA /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3DDE74923CB32420036B6CA /* ArticleCell.xib */; };
@@ -47,6 +48,7 @@
 		D31072E023C9C71A00BE86DD /* TopHeadlinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlinesViewController.swift; sourceTree = "<group>"; };
 		D31072E123C9C71A00BE86DD /* TopHeadlinesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlinesInteractor.swift; sourceTree = "<group>"; };
 		D31072E923C9EA8300BE86DD /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		D371865823CBAAA900E29C93 /* PagingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingTableViewController.swift; sourceTree = "<group>"; };
 		D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		D3DDE74923CB32420036B6CA /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				D3DDE74923CB32420036B6CA /* ArticleCell.xib */,
 				D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */,
 				D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */,
+				D371865823CBAAA900E29C93 /* PagingTableViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				D3DDE75223CB613A0036B6CA /* ArticleDetailsPresenter.swift in Sources */,
 				D31072E623C9C71A00BE86DD /* TopHeadlinesViewController.swift in Sources */,
 				D31072E523C9C71A00BE86DD /* TopHeadlinesModels.swift in Sources */,
+				D371865923CBAAA900E29C93 /* PagingTableViewController.swift in Sources */,
 				D3DDE75723CB613A0036B6CA /* ArticleDetailsInteractor.swift in Sources */,
 				D31072C923C9C58200BE86DD /* AppDelegate.swift in Sources */,
 				D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */,
