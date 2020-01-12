@@ -27,6 +27,15 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
     var isEndOfList = false
     var totalResults: Int?
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(handleRefresh(_:)),
+                                 for: UIControl.Event.valueChanged)
+        
+        return refreshControl
+    }()
+    
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -71,9 +80,15 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.refreshControl = refreshControl
         registerNibCell(nibName: "LoadingCell", cellId: "loadingCellId")
         registerNibCell(nibName: "ArticleCell", cellId: "articleCellId")
         launchFetchingData()
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        isLoading = true
+        fetchTopHeadlines()
     }
     
     func launchFetchingData() {
@@ -92,7 +107,11 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
     }
   
     func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel) {
-        updateHeadlines(articles: viewModel.headlines)
+        refreshControl.endRefreshing()
+        if isLoading {
+            isLoading = false
+            updateHeadlines(articles: viewModel.headlines, currentPage: viewModel.currentPage)
+        }
         
         if let results = totalResults, totalResults != viewModel.totalResults{
             isLoading = true
@@ -102,16 +121,15 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
         }
     }
     
-    func updateHeadlines(articles: [TopHeadlines.Article]?){
-        if isLoading{
-            isLoading = false
-            if let headlineList = articles {
-                if headlineList.count < 15 {
-                    isEndOfList = true
-                }
+    func updateHeadlines(articles: [TopHeadlines.Article]?, currentPage: Int) {
+        if let headlineList = articles {
+            isEndOfList = headlineList.count < 15 ? true : false
+            if currentPage == 1 {
+                headlines = headlineList
+            } else {
                 headlines.append(contentsOf: headlineList)
-                tableView.reloadData()
             }
+            tableView.reloadData()
         }
     }
     

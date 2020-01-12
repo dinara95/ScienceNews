@@ -23,10 +23,12 @@ enum TopHeadlines {
         struct Response {
             var articles: [Article]?
             var totalResults: Int?
+            var currentPage: Int?
         }
         struct ViewModel {
             var headlines: [Article]?
             var totalResults: Int
+            var currentPage: Int
         }
     }
     

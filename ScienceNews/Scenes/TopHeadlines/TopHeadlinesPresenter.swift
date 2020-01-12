@@ -13,7 +13,7 @@
 import UIKit
 
 protocol TopHeadlinesPresentationLogic {
-    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response)
+    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response?)
 }
 
 class TopHeadlinesPresenter: TopHeadlinesPresentationLogic {
@@ -21,9 +21,9 @@ class TopHeadlinesPresenter: TopHeadlinesPresentationLogic {
 
     // MARK: Present Top Headlines
 
-    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response) {
+    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response?) {
         
-        let articles = response.articles?.enumerated().map({ (index, article) -> TopHeadlines.Article in
+        let articles = response?.articles?.enumerated().map({ (index, article) -> TopHeadlines.Article in
             var modifiedArticle = article
             let date = article.publishDate?.asDate.stringForDate(withFormat: "dd.MMMM yyyy")
             modifiedArticle.publishDate = date
@@ -32,7 +32,7 @@ class TopHeadlinesPresenter: TopHeadlinesPresentationLogic {
         })
 
         
-        let viewModel = TopHeadlines.FetchTopHeadlines.ViewModel(headlines: articles, totalResults: response.totalResults ?? 0)
+        let viewModel = TopHeadlines.FetchTopHeadlines.ViewModel(headlines: articles, totalResults: response?.totalResults ?? 0, currentPage: response?.currentPage ?? 1)
         viewController?.displayTopHeadlines(viewModel: viewModel)
     }
 }
