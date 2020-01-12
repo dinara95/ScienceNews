@@ -10,40 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Top Headlines-->
-        <scene sceneID="UUK-Jq-G4L">
-            <objects>
-                <viewController id="B6r-Sd-HYB" customClass="TopHeadlinesViewController" customModule="ScienceNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tZX-4d-pc9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C0g-2P-Ujg">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="C0g-2P-Ujg" firstAttribute="top" secondItem="5D8-Ot-S9P" secondAttribute="top" id="BMf-ZP-Y0b"/>
-                            <constraint firstItem="5D8-Ot-S9P" firstAttribute="trailing" secondItem="C0g-2P-Ujg" secondAttribute="trailing" id="FCC-rh-gpk"/>
-                            <constraint firstItem="C0g-2P-Ujg" firstAttribute="leading" secondItem="5D8-Ot-S9P" secondAttribute="leading" id="U0d-L1-Gcl"/>
-                            <constraint firstItem="5D8-Ot-S9P" firstAttribute="bottom" secondItem="C0g-2P-Ujg" secondAttribute="bottom" id="nzf-ut-jIk"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="5D8-Ot-S9P"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Top Headlines" id="0M2-gQ-Gun">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="save" id="XPk-9U-DLL"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="C0g-2P-Ujg" id="lGW-yj-rrU"/>
-                        <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="2ti-VA-lcn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vjc-BX-GFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6524.6376811594209" y="46.875"/>
-        </scene>
         <!--Article Details View Controller-->
         <scene sceneID="vuw-cE-Fch">
             <objects>
@@ -177,12 +143,46 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="B6r-Sd-HYB" kind="relationship" relationship="rootViewController" id="Av8-E6-svx"/>
+                        <segue destination="pRD-lk-A4Y" kind="relationship" relationship="rootViewController" id="dEK-0j-sZA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQA-nj-ksG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5614.4927536231889" y="46.875"/>
+        </scene>
+        <!--Top Headlines-->
+        <scene sceneID="fDq-Ka-ZN0">
+            <objects>
+                <tableViewController id="pRD-lk-A4Y" customClass="TopHeadlinesViewController" customModule="ScienceNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CEM-eB-cWB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="S87-cU-Zsz">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S87-cU-Zsz" id="Gbr-N6-8GN">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pRD-lk-A4Y" id="9dl-Jn-epr"/>
+                            <outlet property="delegate" destination="pRD-lk-A4Y" id="pac-LG-3VP"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Top Headlines" id="E6c-yg-R94">
+                        <barButtonItem key="rightBarButtonItem" image="save" id="drr-bz-FzM"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="LEw-RU-iJw"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Coi-3L-NtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6435" y="42"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="RXd-LK-CZe">
