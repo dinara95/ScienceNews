@@ -17,6 +17,7 @@ enum TopHeadlines {
   
     enum FetchTopHeadlines {
         struct Request {
+            var page: Int
         }
         struct Response {
             var articles: [Article]?

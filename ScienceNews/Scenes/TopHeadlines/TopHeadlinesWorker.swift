@@ -14,13 +14,13 @@ import UIKit
 
 class TopHeadlinesWorker {
     
-    func fetchTopHeadlines(completionHandler: @escaping ([TopHeadlines.Article]?) -> Void) {
+    func fetchTopHeadlines(page: Int, completionHandler: @escaping ([TopHeadlines.Article]?) -> Void) {
         var transactionHistoryList = TopHeadlines.ArticleList(articles: [TopHeadlines.Article]())
 //        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=e65ee0938a2a43ebb15923b48faed18d") else { return }
         
         var components = URLComponents(string: "https://newsapi.org/v2/top-headlines?")!
         components.queryItems = [
-            URLQueryItem(name: "country", value: "us"), URLQueryItem(name: "category", value: "science"), URLQueryItem(name: "apiKey", value: "e65ee0938a2a43ebb15923b48faed18d"), URLQueryItem(name: "pageSize", value: "15"), URLQueryItem(name: "page", value: "1")
+            URLQueryItem(name: "country", value: "us"), URLQueryItem(name: "category", value: "science"), URLQueryItem(name: "apiKey", value: "e65ee0938a2a43ebb15923b48faed18d"), URLQueryItem(name: "pageSize", value: "15"), URLQueryItem(name: "page", value: "\(page)")
         ]
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         let request = URLRequest(url: components.url!)

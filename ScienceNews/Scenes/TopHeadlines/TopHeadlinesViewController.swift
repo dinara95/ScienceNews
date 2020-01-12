@@ -24,6 +24,7 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
     var router: (NSObjectProtocol & TopHeadlinesRoutingLogic & TopHeadlinesDataPassing)?
     var headlines = [TopHeadlines.Article]()
     var isLoading = false
+    var isEndOfList = false
     
     // MARK: Object lifecycle
 
@@ -72,22 +73,29 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
         fetchTopHeadlines()
         let tableViewLoadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
         self.tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: "loadingCell")
+        let articleCellNib = UINib(nibName: "ArticleCell", bundle: nil)
+        self.tableView.register(articleCellNib, forCellReuseIdentifier: "articleCellId")
     }
   
     // MARK: Fetch Top Headlines
   
     func fetchTopHeadlines() {
-        let request = TopHeadlines.FetchTopHeadlines.Request()
+        let page = headlines.count / 15 + 1
+        let request = TopHeadlines.FetchTopHeadlines.Request(page: page)
         interactor?.fetchTopHeadlines(request: request)
     }
   
     func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel) {
         isLoading = false
-        if let headlineList = viewModel.headlines{
+        
+        if let headlineList = viewModel.headlines {
+            if headlineList.count < 15 {
+                isEndOfList = true
+                
+            }
             headlines.append(contentsOf: headlineList)
             tableView.reloadData()
         }
-        
     }
 }
 
@@ -98,20 +106,17 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            //Return the amount of items
             return headlines.count
-        } else if section == 1 {
-            //Return the Loading cell
+        } else if section == 1 && !isEndOfList {
             return 1
         } else {
-            //Return nothing
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "headlineCell", for: indexPath) as! HeadlinesTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "articleCellId", for: indexPath) as! ArticleCell
             let article = headlines[indexPath.row]
             cell.title.text = article.title
             cell.articleDescription.text = article.description
@@ -121,7 +126,7 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
                 cell.articleImg.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
             }
             return cell
-        } else  {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingCell
             cell.activityIndicator.startAnimating()
             return cell
@@ -130,21 +135,20 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 194 //Item Cell height
+            return 194
         } else {
-            return 55 //Loading Cell height
+            return 55
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height 
+        let contentHeight = scrollView.contentSize.height
         
-        if (offsetY > contentHeight - scrollView.frame.height) && !isLoading {
+        if (offsetY > contentHeight - scrollView.frame.height - 55) && !isLoading && !isEndOfList {
             loadMoreData()
         }
     }
-    
     
     func loadMoreData() {
         if !self.isLoading {
@@ -154,5 +158,4 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
     }
-    
 }
