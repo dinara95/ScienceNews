@@ -25,6 +25,7 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
     var headlines = [TopHeadlines.Article]()
     var isLoading = false
     var isEndOfList = false
+    var totalResults: Int?
     
     // MARK: Object lifecycle
 
@@ -70,32 +71,53 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        registerNibCell(nibName: "LoadingCell", cellId: "loadingCellId")
+        registerNibCell(nibName: "ArticleCell", cellId: "articleCellId")
+        launchFetchingData()
+    }
+    
+    func launchFetchingData() {
+        isLoading = true
         fetchTopHeadlines()
-        let tableViewLoadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
-        self.tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: "loadingCell")
-        let articleCellNib = UINib(nibName: "ArticleCell", bundle: nil)
-        self.tableView.register(articleCellNib, forCellReuseIdentifier: "articleCellId")
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+            self.fetchTopHeadlines()
+        }
     }
   
     // MARK: Fetch Top Headlines
   
-    func fetchTopHeadlines() {
-        let page = headlines.count / 15 + 1
-        let request = TopHeadlines.FetchTopHeadlines.Request(page: page)
+    func fetchTopHeadlines(of page: Int = 1, with pageSize: Int = 15) {
+        let request = TopHeadlines.FetchTopHeadlines.Request(page: page, pageSize: pageSize)
         interactor?.fetchTopHeadlines(request: request)
     }
   
     func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel) {
-        isLoading = false
+        updateHeadlines(articles: viewModel.headlines)
         
-        if let headlineList = viewModel.headlines {
-            if headlineList.count < 15 {
-                isEndOfList = true
-                
-            }
-            headlines.append(contentsOf: headlineList)
-            tableView.reloadData()
+        if let results = totalResults, totalResults != viewModel.totalResults{
+            isLoading = true
+            fetchTopHeadlines(of: 1, with: (headlines.count + abs(viewModel.totalResults - results)) % 100)
+        } else {
+            totalResults = viewModel.totalResults
         }
+    }
+    
+    func updateHeadlines(articles: [TopHeadlines.Article]?){
+        if isLoading{
+            isLoading = false
+            if let headlineList = articles {
+                if headlineList.count < 15 {
+                    isEndOfList = true
+                }
+                headlines.append(contentsOf: headlineList)
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    func registerNibCell(nibName: String, cellId: String){
+        let tableViewLoadingCellNib = UINib(nibName: nibName, bundle: nil)
+        tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: cellId)
     }
 }
 
@@ -127,7 +149,7 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
             }
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCellId", for: indexPath) as! LoadingCell
             cell.activityIndicator.startAnimating()
             return cell
         }
@@ -135,7 +157,7 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 194
+            return 195
         } else {
             return 55
         }
@@ -154,7 +176,8 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
         if !self.isLoading {
             self.isLoading = true
             DispatchQueue.global().async {
-                self.fetchTopHeadlines()
+                let page = self.headlines.count / 15 + 1
+                self.fetchTopHeadlines(of: page)
             }
         }
     }

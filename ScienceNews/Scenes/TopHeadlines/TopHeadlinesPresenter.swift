@@ -32,7 +32,7 @@ class TopHeadlinesPresenter: TopHeadlinesPresentationLogic {
         })
 
         
-        let viewModel = TopHeadlines.FetchTopHeadlines.ViewModel(headlines: articles)
+        let viewModel = TopHeadlines.FetchTopHeadlines.ViewModel(headlines: articles, totalResults: response.totalResults ?? 0)
         viewController?.displayTopHeadlines(viewModel: viewModel)
     }
 }

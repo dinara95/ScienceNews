@@ -18,12 +18,15 @@ enum TopHeadlines {
     enum FetchTopHeadlines {
         struct Request {
             var page: Int
+            var pageSize: Int
         }
         struct Response {
             var articles: [Article]?
+            var totalResults: Int?
         }
         struct ViewModel {
             var headlines: [Article]?
+            var totalResults: Int
         }
     }
     
@@ -48,6 +51,7 @@ enum TopHeadlines {
     
     struct ArticleList: Codable {
         var articles: [Article]?
+        var totalResults: Int
     }
     
     

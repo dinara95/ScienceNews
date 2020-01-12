@@ -28,8 +28,8 @@ class TopHeadlinesInteractor: TopHeadlinesBusinessLogic, TopHeadlinesDataStore {
   
     func fetchTopHeadlines(request: TopHeadlines.FetchTopHeadlines.Request) {
         worker = TopHeadlinesWorker()
-        worker?.fetchTopHeadlines(page: request.page, completionHandler: { (articles) in
-            let response = TopHeadlines.FetchTopHeadlines.Response(articles: articles)
+        worker?.fetchTopHeadlines(with: request, completionHandler: { (articleList) in
+            let response = TopHeadlines.FetchTopHeadlines.Response(articles: articleList?.articles, totalResults: articleList?.totalResults)
             self.presenter?.presentTopHeadlines(response: response)
         })
     }

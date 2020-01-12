@@ -14,13 +14,12 @@ import UIKit
 
 class TopHeadlinesWorker {
     
-    func fetchTopHeadlines(page: Int, completionHandler: @escaping ([TopHeadlines.Article]?) -> Void) {
-        var transactionHistoryList = TopHeadlines.ArticleList(articles: [TopHeadlines.Article]())
-//        guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=e65ee0938a2a43ebb15923b48faed18d") else { return }
+    func fetchTopHeadlines(with request: TopHeadlines.FetchTopHeadlines.Request, completionHandler: @escaping (TopHeadlines.ArticleList?) -> Void) {
+        var transactionHistoryList = TopHeadlines.ArticleList(articles: [TopHeadlines.Article](), totalResults: 0)
         
         var components = URLComponents(string: "https://newsapi.org/v2/top-headlines?")!
         components.queryItems = [
-            URLQueryItem(name: "country", value: "us"), URLQueryItem(name: "category", value: "science"), URLQueryItem(name: "apiKey", value: "e65ee0938a2a43ebb15923b48faed18d"), URLQueryItem(name: "pageSize", value: "15"), URLQueryItem(name: "page", value: "\(page)")
+            URLQueryItem(name: "country", value: "us"), URLQueryItem(name: "category", value: "science"), URLQueryItem(name: "apiKey", value: "e65ee0938a2a43ebb15923b48faed18d"), URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)")
         ]
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         let request = URLRequest(url: components.url!)
@@ -31,7 +30,7 @@ class TopHeadlinesWorker {
                 let decoder = JSONDecoder()
                 transactionHistoryList = try decoder.decode(TopHeadlines.ArticleList.self, from: dataObject)
                 DispatchQueue.main.async {
-                    completionHandler(transactionHistoryList.articles)
+                    completionHandler(transactionHistoryList)
                 }
             } catch let error {
                 print("Error decoding TopHeadlines json \(error)")
