@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,8 @@
 		D31072E623C9C71A00BE86DD /* TopHeadlinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E023C9C71A00BE86DD /* TopHeadlinesViewController.swift */; };
 		D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E123C9C71A00BE86DD /* TopHeadlinesInteractor.swift */; };
 		D31072EA23C9EA8300BE86DD /* HeadlinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31072E923C9EA8300BE86DD /* HeadlinesTableViewCell.swift */; };
+		D3DDE73923CAFAF00036B6CA /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */; };
+		D3DDE73A23CAFAF00036B6CA /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		D31072E023C9C71A00BE86DD /* TopHeadlinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlinesViewController.swift; sourceTree = "<group>"; };
 		D31072E123C9C71A00BE86DD /* TopHeadlinesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlinesInteractor.swift; sourceTree = "<group>"; };
 		D31072E923C9EA8300BE86DD /* HeadlinesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlinesTableViewCell.swift; sourceTree = "<group>"; };
+		D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,6 @@
 				0A20097C3F0269FEAAFC2DE9 /* Pods-ScienceNews.debug.xcconfig */,
 				1E7D417628A02280B4D1CC18 /* Pods-ScienceNews.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -91,6 +94,7 @@
 		D31072C723C9C58200BE86DD /* ScienceNews */ = {
 			isa = PBXGroup;
 			children = (
+				D3DDE73623CAFACA0036B6CA /* Common */,
 				D31072DA23C9C6D800BE86DD /* Scenes */,
 				D31072C823C9C58200BE86DD /* AppDelegate.swift */,
 				D31072CC23C9C58200BE86DD /* Main.storyboard */,
@@ -129,6 +133,15 @@
 				D31072E923C9EA8300BE86DD /* HeadlinesTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D3DDE73623CAFACA0036B6CA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */,
+				D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +206,7 @@
 			files = (
 				D31072D323C9C58300BE86DD /* LaunchScreen.storyboard in Resources */,
 				D31072D023C9C58300BE86DD /* Assets.xcassets in Resources */,
+				D3DDE73A23CAFAF00036B6CA /* LoadingCell.xib in Resources */,
 				D31072CE23C9C58200BE86DD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +266,7 @@
 				D31072E523C9C71A00BE86DD /* TopHeadlinesModels.swift in Sources */,
 				D31072C923C9C58200BE86DD /* AppDelegate.swift in Sources */,
 				D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */,
+				D3DDE73923CAFAF00036B6CA /* LoadingCell.swift in Sources */,
 				D31072E323C9C71A00BE86DD /* TopHeadlinesWorker.swift in Sources */,
 				D31072EA23C9EA8300BE86DD /* HeadlinesTableViewCell.swift in Sources */,
 			);

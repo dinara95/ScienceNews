@@ -22,7 +22,8 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
     
     var interactor: TopHeadlinesBusinessLogic?
     var router: (NSObjectProtocol & TopHeadlinesRoutingLogic & TopHeadlinesDataPassing)?
-    var headlines: [TopHeadlines.Article]?
+    var headlines = [TopHeadlines.Article]()
+    var isLoading = false
     
     // MARK: Object lifecycle
 
@@ -69,6 +70,8 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
         tableView.delegate = self
         tableView.dataSource = self
         fetchTopHeadlines()
+        let tableViewLoadingCellNib = UINib(nibName: "LoadingCell", bundle: nil)
+        self.tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: "loadingCell")
     }
   
     // MARK: Fetch Top Headlines
@@ -79,19 +82,37 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
     }
   
     func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel) {
-        headlines = viewModel.headlines
-        tableView.reloadData()
+        isLoading = false
+        if let headlineList = viewModel.headlines{
+            headlines.append(contentsOf: headlineList)
+            tableView.reloadData()
+        }
+        
     }
 }
 
 extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return headlines?.count ?? 0
+        if section == 0 {
+            //Return the amount of items
+            return headlines.count
+        } else if section == 1 {
+            //Return the Loading cell
+            return 1
+        } else {
+            //Return nothing
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "headlineCell", for: indexPath) as! HeadlinesTableViewCell
-        if let article = headlines?[indexPath.row] {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "headlineCell", for: indexPath) as! HeadlinesTableViewCell
+            let article = headlines[indexPath.row]
             cell.title.text = article.title
             cell.articleDescription.text = article.description
             cell.publishDate.text = article.publishDate
@@ -99,15 +120,38 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
             if let url = URL(string: article.imageUrl ?? "") {
                 cell.articleImg.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
             }
+            return cell
+        } else  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath) as! LoadingCell
+            cell.activityIndicator.startAnimating()
+            return cell
         }
-        return cell
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("DINARA", headlines?.count, "\nIndex", headlines?[indexPath.row].id)
-        guard let headlineList = headlines else { return }
-        if indexPath.row == headlineList.count - 1 {
-            print("RELOADDDDD")
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 194 //Item Cell height
+        } else {
+            return 55 //Loading Cell height
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height 
+        
+        if (offsetY > contentHeight - scrollView.frame.height) && !isLoading {
+            loadMoreData()
+        }
+    }
+    
+    
+    func loadMoreData() {
+        if !self.isLoading {
+            self.isLoading = true
+            DispatchQueue.global().async {
+                self.fetchTopHeadlines()
+            }
         }
     }
     
