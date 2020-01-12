@@ -66,12 +66,10 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
     // MARK: Routing
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-          let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-          if let router = router, router.responds(to: selector) {
-            router.perform(selector, with: segue)
-          }
-        }
+        let destinationVC = segue.destination as! ArticleDetailsViewController
+        guard let indexPath = tableView.indexPathForSelectedRow else{fatalError("No indexPath")}
+        destinationVC.selectedArticle = headlines[indexPath.row]
+//        self.hidesBottomBarWhenPushed = true
     }
   
     // MARK: View lifecycle
@@ -84,6 +82,10 @@ class TopHeadlinesViewController: UIViewController, TopHeadlinesDisplayLogic {
         registerNibCell(nibName: "LoadingCell", cellId: "loadingCellId")
         registerNibCell(nibName: "ArticleCell", cellId: "articleCellId")
         launchFetchingData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        self.hidesBottomBarWhenPushed = false
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -171,6 +173,10 @@ extension TopHeadlinesViewController: UITableViewDelegate, UITableViewDataSource
             cell.activityIndicator.startAnimating()
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToArticle", sender: self)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

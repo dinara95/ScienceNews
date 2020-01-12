@@ -40,6 +40,7 @@ enum TopHeadlines {
         var publishDate: String?
         var content: String?
         var id: Int?
+        var articleUrl: String?
         
         private enum CodingKeys: String, CodingKey {
             case title
@@ -48,6 +49,7 @@ enum TopHeadlines {
             case imageUrl = "urlToImage"
             case publishDate = "publishedAt"
             case content
+            case articleUrl = "url"
         }
     }
     
