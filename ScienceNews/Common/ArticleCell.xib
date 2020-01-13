@@ -57,6 +57,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quL-Vg-fCP">
                                         <rect key="frame" x="33" y="13" width="14" height="24"/>
                                         <state key="normal" image="save"/>
+                                        <connections>
+                                            <action selector="onButtonPress:" destination="eTp-S7-Cia" eventType="touchUpInside" id="9Uk-Nd-1Xl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -91,10 +94,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="articleButton" destination="quL-Vg-fCP" id="abj-fN-W6c"/>
                 <outlet property="articleDescription" destination="6WG-n2-vSr" id="2su-Ir-Ioz"/>
                 <outlet property="articleImg" destination="tSs-1y-1cm" id="TAN-kz-BQj"/>
                 <outlet property="author" destination="8s9-b3-g1e" id="24Q-42-32f"/>
-                <outlet property="bookmarkButton" destination="quL-Vg-fCP" id="Zwp-fk-s8W"/>
                 <outlet property="publishDate" destination="B7b-3r-Uuw" id="MPH-ws-5en"/>
                 <outlet property="title" destination="Jqv-VO-VMr" id="ek0-Qp-VxJ"/>
             </connections>

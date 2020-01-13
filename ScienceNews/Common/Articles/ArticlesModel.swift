@@ -39,6 +39,7 @@ enum Articles {
         var content: String?
         var id: Int?
         var articleUrl: String?
+        var saved: Bool?  
         
         private enum CodingKeys: String, CodingKey {
             case title

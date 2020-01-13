@@ -64,10 +64,13 @@ class PagingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "articleCellId", for: indexPath) as! ArticleCell
+            cell.delegate = self
+            cell.indexPath = indexPath
             let article = articles[indexPath.row]
             cell.title.text = article.title
             cell.articleDescription.text = article.description
             cell.publishDate.text = article.publishDate
+            cell.articleButton.imageView?.image = article.saved! ? UIImage(named: "saved") : UIImage(named: "save")
             cell.author.text = article.author
             if let url = URL(string: article.imageUrl ?? "") {
                 cell.articleImg.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
@@ -157,4 +160,13 @@ class PagingTableViewController: UITableViewController {
         
     }
 
+}
+
+extension PagingTableViewController: ArticleCellDelegate {
+    func articleButtonPress(at indexPath: IndexPath) {
+        articles[indexPath.row].saved = !articles[indexPath.row].saved!
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    
 }

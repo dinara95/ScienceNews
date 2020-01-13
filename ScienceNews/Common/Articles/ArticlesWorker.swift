@@ -45,6 +45,7 @@ class ArticlesWorker {
             var modifiedArticle = article
             let date = article.publishDate?.asDate.stringForDate(withFormat: "dd.MMMM yyyy")
             modifiedArticle.publishDate = date
+            modifiedArticle.saved = false
             modifiedArticle.id = index
             return modifiedArticle
         })
