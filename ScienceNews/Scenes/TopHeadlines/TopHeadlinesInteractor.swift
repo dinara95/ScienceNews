@@ -16,11 +16,7 @@ protocol TopHeadlinesBusinessLogic {
     func fetchTopHeadlines(request: Articles.FetchArticles.Request)
 }
 
-protocol TopHeadlinesDataStore {
-    //var name: String { get set }
-}
-
-class TopHeadlinesInteractor: TopHeadlinesBusinessLogic, TopHeadlinesDataStore {
+class TopHeadlinesInteractor: TopHeadlinesBusinessLogic {
     var presenter: TopHeadlinesPresentationLogic?
     var worker: ArticlesWorker?
   

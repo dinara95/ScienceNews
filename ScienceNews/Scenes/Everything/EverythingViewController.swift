@@ -63,8 +63,6 @@ class EverythingViewController: PagingTableViewController, EverythingDisplayLogi
     }
     
     func displayEverything(viewModel: Articles.FetchArticles.ViewModel) {
-        if let headlines = viewModel.headlines {
-            updateArticleList(articleList: headlines, currentPage: viewModel.currentPage, resultsAmount: viewModel.totalResults)
-        }
+        updateArticleList(articleList: viewModel.headlines ?? [], currentPage: viewModel.currentPage, resultsAmount: viewModel.totalResults)
     }
 }

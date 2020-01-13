@@ -9,12 +9,14 @@
 import Foundation
 
 class ArticlesWorker {
+    let MY_KEY = "4b2e6714d8dc4d5b941705bea49a6404"
+    let AVIATA_KEY = "e65ee0938a2a43ebb15923b48faed18d"
 
     func fetchArticles(with request: Articles.FetchArticles.Request, completionHandler: @escaping (Articles.FetchArticles.Response?) -> Void) {
         var articleList = Articles.ArticleList(articles: [Articles.Article](), totalResults: 0)
         
         var components = URLComponents(string: request.url)!
-        components.queryItems = [URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)"), URLQueryItem(name: "apiKey", value: "e65ee0938a2a43ebb15923b48faed18d")]
+        components.queryItems = [URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)"), URLQueryItem(name: "apiKey", value: MY_KEY)]
         components.queryItems?.append(contentsOf: request.params)
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         let urlRequest = URLRequest(url: components.url!)
@@ -28,6 +30,7 @@ class ArticlesWorker {
                 DispatchQueue.main.async {
                     completionHandler(response)
                 }
+                
             } catch let error {
                 print("Error decoding TopHeadlines json \(error)")
                 DispatchQueue.main.async {
@@ -50,6 +53,8 @@ class ArticlesWorker {
         return viewModel
     }
 }
+
+
 
 
 extension String {

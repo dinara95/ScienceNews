@@ -12,18 +12,11 @@
 
 import UIKit
 
-protocol EverythingBusinessLogic
-{
-  func fetchEverything(request: Articles.FetchArticles.Request)
+protocol EverythingBusinessLogic {
+    func fetchEverything(request: Articles.FetchArticles.Request)
 }
 
-protocol EverythingDataStore
-{
-  //var name: String { get set }
-}
-
-class EverythingInteractor: EverythingBusinessLogic, EverythingDataStore
-{
+class EverythingInteractor: EverythingBusinessLogic {
     var presenter: EverythingPresentationLogic?
     var worker: ArticlesWorker?
     

@@ -180,11 +180,11 @@
 		D3DDE74B23CB61100036B6CA /* ArticleDetails */ = {
 			isa = PBXGroup;
 			children = (
+				D3DDE75023CB613A0036B6CA /* ArticleDetailsViewController.swift */,
 				D3DDE74C23CB613A0036B6CA /* ArticleDetailsPresenter.swift */,
 				D3DDE74D23CB613A0036B6CA /* ArticleDetailsWorker.swift */,
 				D3DDE74E23CB613A0036B6CA /* ArticleDetailsRouter.swift */,
 				D3DDE74F23CB613A0036B6CA /* ArticleDetailsModels.swift */,
-				D3DDE75023CB613A0036B6CA /* ArticleDetailsViewController.swift */,
 				D3DDE75123CB613A0036B6CA /* ArticleDetailsInteractor.swift */,
 			);
 			path = ArticleDetails;

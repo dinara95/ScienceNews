@@ -12,13 +12,11 @@
 
 import UIKit
 
-protocol EverythingPresentationLogic
-{
-  func presentEverything(response: Articles.FetchArticles.Response?)
+protocol EverythingPresentationLogic {
+    func presentEverything(response: Articles.FetchArticles.Response?)
 }
 
-class EverythingPresenter: EverythingPresentationLogic
-{
+class EverythingPresenter: EverythingPresentationLogic {
     weak var viewController: EverythingDisplayLogic?
     var worker = ArticlesWorker()
     

@@ -53,9 +53,7 @@ enum Articles {
     
     struct ArticleList: Codable {
         var articles: [Article]?
-        var totalResults: Int
+        var totalResults: Int?
     }
-    
-    
 }
 

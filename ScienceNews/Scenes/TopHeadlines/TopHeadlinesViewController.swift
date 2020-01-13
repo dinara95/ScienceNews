@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 protocol TopHeadlinesDisplayLogic: class {
     func displayTopHeadlines(viewModel: Articles.FetchArticles.ViewModel)
@@ -47,7 +46,6 @@ class TopHeadlinesViewController: PagingTableViewController, TopHeadlinesDisplay
     }
     
     func launchFetchingData() {
-        isLoading = true
         fetchArticles()
         Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
             self.fetchArticles()
@@ -63,8 +61,6 @@ class TopHeadlinesViewController: PagingTableViewController, TopHeadlinesDisplay
     }
     
     func displayTopHeadlines(viewModel: Articles.FetchArticles.ViewModel) {
-        if let headlines = viewModel.headlines {
-            updateArticleList(articleList: headlines, currentPage: viewModel.currentPage, resultsAmount: viewModel.totalResults)
-        }
+        updateArticleList(articleList: viewModel.headlines ?? [], currentPage: viewModel.currentPage, resultsAmount: viewModel.totalResults)
     }
 }
