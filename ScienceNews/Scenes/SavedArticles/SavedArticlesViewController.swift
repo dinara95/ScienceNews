@@ -126,6 +126,10 @@ class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLo
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToArticle", sender: self)
+    }
+    
     func deleteCategory(article: ArticleObject){
         do{
             //            try container.write {
