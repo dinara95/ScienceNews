@@ -54,9 +54,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zg6-Vx-VBC">
                                 <rect key="frame" x="294" y="0.0" width="80" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quL-Vg-fCP">
-                                        <rect key="frame" x="33" y="13" width="14" height="24"/>
-                                        <state key="normal" image="save"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quL-Vg-fCP">
+                                        <rect key="frame" x="28" y="13" width="24" height="24"/>
+                                        <state key="normal" image="saved"/>
                                         <connections>
                                             <action selector="onButtonPress:" destination="eTp-S7-Cia" eventType="touchUpInside" id="9Uk-Nd-1Xl"/>
                                         </connections>
@@ -106,6 +106,6 @@
     </objects>
     <resources>
         <image name="placeholder" width="80" height="80"/>
-        <image name="save" width="14" height="24"/>
+        <image name="saved" width="24" height="24"/>
     </resources>
 </document>

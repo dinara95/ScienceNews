@@ -65,12 +65,19 @@ class PagingTableViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "articleCellId", for: indexPath) as! ArticleCell
+            var article = articles[indexPath.row]
+            let savedArticle = realm.object(ofType: ArticleObject.self, forPrimaryKey: article.articleUrl)
+            article.saved = savedArticle != nil ? true: false
+            
             cell.delegate = self
             cell.indexPath = indexPath
-            let article = articles[indexPath.row]
             cell.title.text = article.title
             cell.articleDescription.text = article.description
             cell.publishDate.text = article.publishDate
@@ -224,10 +231,9 @@ class PagingTableViewController: UITableViewController {
 extension PagingTableViewController: ArticleCellDelegate {
     func articleButtonPress(at indexPath: IndexPath) {
         articles[indexPath.row].saved = !articles[indexPath.row].saved!
-        if articles[indexPath.row].saved! {
+        if articles[indexPath.row].saved! == true {
             saveArticle(article: articles[indexPath.row])
-        }
-        else {
+        } else {
             let articleToDelete = realm.object(ofType: ArticleObject.self, forPrimaryKey: articles[indexPath.row].articleUrl)
             if let article = articleToDelete {
                 deleteCategory(article: article)

@@ -138,7 +138,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pvm-cZ-SgE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.64825081829999998" blue="0.84252276380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
                             <outlet property="dataSource" destination="Y1X-n8-O1C" id="Lbw-Vd-cWB"/>
                             <outlet property="delegate" destination="Y1X-n8-O1C" id="heg-dg-bmK"/>
@@ -266,7 +266,7 @@
     <resources>
         <image name="news" width="24" height="20"/>
         <image name="placeholder" width="80" height="80"/>
-        <image name="save" width="14" height="24"/>
+        <image name="save" width="24" height="24"/>
         <image name="trends" width="19" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>

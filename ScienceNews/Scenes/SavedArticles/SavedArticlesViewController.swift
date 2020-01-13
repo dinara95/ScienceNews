@@ -11,14 +11,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol SavedArticlesDisplayLogic: class
 {
   func displaySomething(viewModel: SavedArticles.Something.ViewModel)
 }
 
-class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLogic
+class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLogic, ArticleCellDelegate
 {
+   
+    
+    var realm = try! Realm()
+    var savedArticles: Results<ArticleObject>?
   var interactor: SavedArticlesBusinessLogic?
   var router: (NSObjectProtocol & SavedArticlesRoutingLogic & SavedArticlesDataPassing)?
 
@@ -73,13 +78,23 @@ class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLo
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    
+    loadSavedArticles()
+    registerNibCell(nibName: "ArticleCell", cellId: "articleCellId")
     doSomething()
   }
+    
+    func registerNibCell(nibName: String, cellId: String){
+        let tableViewLoadingCellNib = UINib(nibName: nibName, bundle: nil)
+        tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: cellId)
+    }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
+    
+    func loadSavedArticles() {
+        savedArticles = realm.objects(ArticleObject.self)
+    }
   
   func doSomething()
   {
@@ -91,4 +106,47 @@ class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLo
   {
     //nameTextField.text = viewModel.name
   }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return savedArticles?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "articleCellId", for: indexPath) as! ArticleCell
+        cell.delegate = self
+        cell.indexPath = indexPath
+        let article = savedArticles?[indexPath.row]
+        cell.title.text = article?.title
+        cell.articleDescription.text = article?.description
+        cell.publishDate.text = article?.publishDate
+        cell.articleButton.imageView?.image = UIImage(named: "saved")
+        cell.author.text = article?.author
+        if let url = URL(string: article?.imageUrl ?? "") {
+            cell.articleImg.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
+        }
+        return cell
+    }
+    
+    func deleteCategory(article: ArticleObject){
+        do{
+            //            try container.write {
+            //                savedArticle in
+            //                savedArticle.delete(article)
+            //            }
+            try realm.write {
+                realm.delete(article)
+            }
+        }catch{
+            print("Error deleting category \(error)")
+        }
+        //we dont reload tableView, because SwipeCell already does it for us
+        tableView.reloadData()
+    }
+    
+    
+    func articleButtonPress(at indexPath: IndexPath) {
+        if let article = savedArticles?[indexPath.row] {
+            deleteCategory(article: article)
+        }
+    }
 }
