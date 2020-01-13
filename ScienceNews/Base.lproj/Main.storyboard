@@ -129,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DT6-zs-ME4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7372.4637681159429" y="48.883928571428569"/>
+            <point key="canvasLocation" x="7419" y="443"/>
         </scene>
         <!--Headlines-->
         <scene sceneID="9fl-3j-95T">
@@ -184,6 +184,30 @@
             </objects>
             <point key="canvasLocation" x="6435" y="42"/>
         </scene>
+        <!--Everything-->
+        <scene sceneID="8kp-kz-SLh">
+            <objects>
+                <tableViewController id="J66-aT-BHZ" customClass="EverythingViewController" customModule="ScienceNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BHm-TF-Ivb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="J66-aT-BHZ" id="2Pd-7j-m9U"/>
+                            <outlet property="delegate" destination="J66-aT-BHZ" id="ISM-DN-S7B"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Everything" id="0A7-ln-Kr4">
+                        <barButtonItem key="rightBarButtonItem" image="book_mark" id="Psz-hf-uiB"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="53M-cR-v5I"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PyW-Pc-JKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6435" y="732"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="RXd-LK-CZe">
             <objects>
@@ -196,16 +220,41 @@
                     </tabBar>
                     <connections>
                         <segue destination="6Af-JF-Tmr" kind="relationship" relationship="viewControllers" id="Yfs-d7-bxr"/>
+                        <segue destination="cTy-5T-sm1" kind="relationship" relationship="viewControllers" id="eD8-bS-itk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6DQ-vE-frb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4704.347826086957" y="46.875"/>
+            <point key="canvasLocation" x="4675" y="408"/>
+        </scene>
+        <!--Everything-->
+        <scene sceneID="A5D-ac-sAe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cTy-5T-sm1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Everything" image="news" id="cLY-v3-Y8G"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="axO-Mz-O7V">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="J66-aT-BHZ" kind="relationship" relationship="rootViewController" id="1xv-hp-RNb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uqQ-2X-hMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5614" y="732"/>
         </scene>
     </scenes>
     <resources>
+        <image name="book_mark" width="14" height="24"/>
+        <image name="news" width="24" height="20"/>
         <image name="placeholder" width="80" height="80"/>
         <image name="save" width="14" height="24"/>
         <image name="trends" width="19" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="53M-cR-v5I"/>
+    </inferredMetricsTieBreakers>
 </document>
