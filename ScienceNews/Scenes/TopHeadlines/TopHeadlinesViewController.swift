@@ -47,9 +47,9 @@ class TopHeadlinesViewController: PagingTableViewController, TopHeadlinesDisplay
     
     func launchFetchingData() {
         fetchArticles()
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
-            self.fetchArticles()
-        }
+//        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+//            self.fetchArticles()
+//        }
     }
     
     // MARK: Fetch Top Headlines

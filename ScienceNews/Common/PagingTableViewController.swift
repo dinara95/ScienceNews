@@ -19,6 +19,7 @@ class PagingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(addTapped))
         refreshControl?.addTarget(self, action:
             #selector(handleRefresh(_:)),
                                  for: UIControl.Event.valueChanged)
@@ -26,10 +27,22 @@ class PagingTableViewController: UITableViewController {
         registerNibCell(nibName: "ArticleCell", cellId: "articleCellId")
     }
     
+    @objc func addTapped() {
+        performSegue(withIdentifier: "goToSavedArticles", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! ArticleDetailsViewController
-        guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("No indexPath") }
-        destinationVC.selectedArticle = articles[indexPath.row]
+        switch segue.identifier {
+        case "goToSavedArticles":
+            break
+        case "goToArticle":
+            let destinationVC = segue.destination as! ArticleDetailsViewController
+            guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("No indexPath") }
+            destinationVC.selectedArticle = articles[indexPath.row]
+        default:
+            break
+        }
+       
     }
 
     // MARK: - Table view data source

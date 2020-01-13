@@ -129,7 +129,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DT6-zs-ME4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7419" y="443"/>
+            <point key="canvasLocation" x="7419" y="748"/>
+        </scene>
+        <!--Saved Articles View Controller-->
+        <scene sceneID="AMs-yS-RIO">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="Y1X-n8-O1C" customClass="SavedArticlesViewController" customModule="ScienceNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pvm-cZ-SgE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.64825081829999998" blue="0.84252276380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Y1X-n8-O1C" id="Lbw-Vd-cWB"/>
+                            <outlet property="delegate" destination="Y1X-n8-O1C" id="heg-dg-bmK"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="alj-Md-Qek" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7419" y="47"/>
         </scene>
         <!--Headlines-->
         <scene sceneID="9fl-3j-95T">
@@ -143,7 +161,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="pRD-lk-A4Y" kind="relationship" relationship="rootViewController" id="dEK-0j-sZA"/>
+                        <segue destination="pRD-lk-A4Y" kind="relationship" relationship="rootViewController" id="o1a-5R-bDA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQA-nj-ksG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -173,11 +191,10 @@
                             <outlet property="delegate" destination="pRD-lk-A4Y" id="pac-LG-3VP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Top Headlines" id="E6c-yg-R94">
-                        <barButtonItem key="rightBarButtonItem" image="save" id="drr-bz-FzM"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Top Headlines" id="E6c-yg-R94"/>
                     <connections>
                         <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="LEw-RU-iJw"/>
+                        <segue destination="Y1X-n8-O1C" kind="show" identifier="goToSavedArticles" id="3j0-aT-TyS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Coi-3L-NtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -197,11 +214,10 @@
                             <outlet property="delegate" destination="J66-aT-BHZ" id="ISM-DN-S7B"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Everything" id="0A7-ln-Kr4">
-                        <barButtonItem key="rightBarButtonItem" image="book_mark" id="Psz-hf-uiB"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Everything" id="0A7-ln-Kr4"/>
                     <connections>
                         <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="53M-cR-v5I"/>
+                        <segue destination="Y1X-n8-O1C" kind="show" identifier="goToSavedArticles" id="gj8-Ql-U6a"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PyW-Pc-JKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -248,13 +264,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="book_mark" width="14" height="24"/>
         <image name="news" width="24" height="20"/>
         <image name="placeholder" width="80" height="80"/>
         <image name="save" width="14" height="24"/>
         <image name="trends" width="19" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="53M-cR-v5I"/>
+        <segue reference="3j0-aT-TyS"/>
+        <segue reference="LEw-RU-iJw"/>
     </inferredMetricsTieBreakers>
 </document>
