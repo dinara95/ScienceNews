@@ -90,7 +90,7 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
     super.viewDidLoad()
     if let articles = selectedArticle {
         articleTitle.text = articles.title
-        articleDescription.text = articles.description
+        articleDescription.text = articles.articleDescription
         publishDate.text = articles.publishDate
         if let url = URL(string: articles.imageUrl ?? "") {
             articleImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))

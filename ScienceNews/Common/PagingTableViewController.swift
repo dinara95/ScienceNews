@@ -79,7 +79,7 @@ class PagingTableViewController: UITableViewController {
             cell.delegate = self
             cell.indexPath = indexPath
             cell.title.text = article.title
-            cell.articleDescription.text = article.description
+            cell.articleDescription.text = article.articleDescription
             cell.publishDate.text = article.publishDate
             cell.articleButton.imageView?.image = article.saved! ? UIImage(named: "saved") : UIImage(named: "save")
             cell.author.text = article.author
@@ -260,7 +260,7 @@ extension Article: Persistable {
     public init(managedObject: ArticleObject) {
         title = managedObject.title
         author = managedObject.author
-        description = managedObject.articleDescription
+        articleDescription = managedObject.articleDescription
         imageUrl = managedObject.imageUrl
         publishDate = managedObject.publishDate
         content = managedObject.content
@@ -271,7 +271,7 @@ extension Article: Persistable {
         let savedArticle = ArticleObject()
         savedArticle.title = title ?? ""
         savedArticle.author = author ?? ""
-        savedArticle.articleDescription = description ?? ""
+        savedArticle.articleDescription = articleDescription ?? ""
         savedArticle.imageUrl = imageUrl ?? ""
         savedArticle.publishDate = publishDate ?? ""
         savedArticle.content = content ?? ""

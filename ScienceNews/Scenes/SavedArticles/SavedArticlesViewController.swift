@@ -63,7 +63,7 @@ class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLo
             let destinationVC = segue.destination as! ArticleDetailsViewController
             guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("No indexPath") }
         let selectedArticle = savedArticles?[indexPath.row]
-        let articleStruct = Article(title: selectedArticle?.title, author: selectedArticle?.author, description: selectedArticle?.articleDescription, imageUrl: selectedArticle?.imageUrl, publishDate: selectedArticle?.publishDate, content: selectedArticle?.content, articleUrl: selectedArticle?.articleUrl, saved: selectedArticle?.saved)
+        let articleStruct = Article(title: selectedArticle?.title, author: selectedArticle?.author, articleDescription: selectedArticle?.articleDescription, imageUrl: selectedArticle?.imageUrl, publishDate: selectedArticle?.publishDate, content: selectedArticle?.content, articleUrl: selectedArticle?.articleUrl, saved: selectedArticle?.saved)
         destinationVC.selectedArticle = articleStruct
         
     }
@@ -116,7 +116,7 @@ class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLo
         cell.indexPath = indexPath
         let article = savedArticles?[indexPath.row]
         cell.title.text = article?.title
-        cell.articleDescription.text = article?.description
+        cell.articleDescription.text = article?.articleDescription
         cell.publishDate.text = article?.publishDate
         cell.articleButton.imageView?.image = UIImage(named: "saved")
         cell.author.text = article?.author
@@ -132,17 +132,12 @@ class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLo
     
     func deleteCategory(article: ArticleObject){
         do{
-            //            try container.write {
-            //                savedArticle in
-            //                savedArticle.delete(article)
-            //            }
             try realm.write {
                 realm.delete(article)
             }
         }catch{
             print("Error deleting category \(error)")
         }
-        //we dont reload tableView, because SwipeCell already does it for us
         tableView.reloadData()
     }
     

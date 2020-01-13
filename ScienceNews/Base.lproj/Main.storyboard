@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEK-zJ-C15" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="675"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NmF-Ce-Hp4">
                                                 <rect key="frame" x="25" y="25" width="364" height="36"/>
@@ -37,39 +37,31 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="r6s-6x-9gm">
-                                                <rect key="frame" x="25" y="121.5" width="364" height="30"/>
+                                                <rect key="frame" x="25" y="121.5" width="364" height="18"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tgu-Zt-H6k">
-                                                        <rect key="frame" x="0.0" y="0.0" width="321.5" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="18"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-Qk-9mg">
-                                                        <rect key="frame" x="346.5" y="0.0" width="17.5" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="17.5" id="ZIU-KA-v7L"/>
-                                                            <constraint firstAttribute="height" constant="30" id="fDy-VZ-qyZ"/>
-                                                        </constraints>
-                                                        <state key="normal" backgroundImage="save"/>
-                                                    </button>
                                                 </subviews>
                                             </stackView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="ljy-8R-c9F">
-                                                <rect key="frame" x="20" y="418.5" width="374" height="135.5"/>
+                                                <rect key="frame" x="20" y="406.5" width="374" height="135.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3ma-Se-G3s">
-                                                <rect key="frame" x="0.0" y="166.5" width="414" height="232"/>
+                                                <rect key="frame" x="0.0" y="154.5" width="414" height="232"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="232" id="fnK-l0-0Zi"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3p9-Ha-5FZ">
-                                                <rect key="frame" x="30" y="574" width="359" height="33"/>
+                                                <rect key="frame" x="30" y="562" width="359" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <state key="normal" title="Read more..."/>
                                                 <connections>
@@ -269,7 +261,6 @@
     <resources>
         <image name="news" width="24" height="20"/>
         <image name="placeholder" width="80" height="80"/>
-        <image name="save" width="14" height="24"/>
         <image name="trends" width="19" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>

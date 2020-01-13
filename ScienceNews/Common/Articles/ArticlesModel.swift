@@ -38,7 +38,7 @@ enum Articles {
     struct Article: Codable {
         var title: String?
         var author: String?
-        var description: String?
+        var articleDescription: String?
         var imageUrl: String?
         var publishDate: String?
         var content: String?
@@ -48,7 +48,7 @@ enum Articles {
         private enum CodingKeys: String, CodingKey {
             case title
             case author
-            case description
+            case articleDescription = "description"
             case imageUrl = "urlToImage"
             case publishDate = "publishedAt"
             case content
