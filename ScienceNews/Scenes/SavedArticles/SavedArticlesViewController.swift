@@ -59,15 +59,14 @@ class SavedArticlesViewController: UITableViewController, SavedArticlesDisplayLo
   
   // MARK: Routing
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let destinationVC = segue.destination as! ArticleDetailsViewController
+            guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("No indexPath") }
+        let selectedArticle = savedArticles?[indexPath.row]
+        let articleStruct = Article(title: selectedArticle?.title, author: selectedArticle?.author, description: selectedArticle?.articleDescription, imageUrl: selectedArticle?.imageUrl, publishDate: selectedArticle?.publishDate, content: selectedArticle?.content, articleUrl: selectedArticle?.articleUrl, saved: selectedArticle?.saved)
+        destinationVC.selectedArticle = articleStruct
+        
     }
-  }
     override func viewWillAppear(_ animated: Bool) {
 //        navigationItem.backBarButtonItem?.title = ""
         
