@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import RealmSwift
 
 class ArticlesWorker {
+    let realm = try! Realm()
     let MY_KEY = "4b2e6714d8dc4d5b941705bea49a6404"
     let AVIATA_KEY = "e65ee0938a2a43ebb15923b48faed18d"
 
     func fetchArticles(with request: Articles.FetchArticles.Request, completionHandler: @escaping (Articles.FetchArticles.Response?) -> Void) {
-        var articleList = Articles.ArticleList(articles: [Articles.Article](), totalResults: 0)
+        var articleList = ArticleList(articles: [Article](), totalResults: 0)
         
         var components = URLComponents(string: request.url)!
         components.queryItems = [URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)"), URLQueryItem(name: "apiKey", value: MY_KEY)]
@@ -25,7 +27,7 @@ class ArticlesWorker {
             guard let dataObject = data else { return }
             do {
                 let decoder = JSONDecoder()
-                articleList = try decoder.decode(Articles.ArticleList.self, from: dataObject)
+                articleList = try decoder.decode(ArticleList.self, from: dataObject)
                 let response = Articles.FetchArticles.Response(articles: articleList.articles, totalResults: articleList.totalResults, currentPage: request.page)
                 DispatchQueue.main.async {
                     completionHandler(response)
@@ -41,18 +43,24 @@ class ArticlesWorker {
     }
     
     func createArticlesViewModel(with response: Articles.FetchArticles.Response?) -> Articles.FetchArticles.ViewModel {
-        let modifiedArticles = response?.articles?.enumerated().map({ (index, article) -> Articles.Article in
+        let modifiedArticles = response?.articles?.enumerated().map({ (index, article) -> Article in
             var modifiedArticle = article
             let date = article.publishDate?.asDate.stringForDate(withFormat: "dd.MMMM yyyy")
             modifiedArticle.publishDate = date
-            modifiedArticle.saved = false
-            modifiedArticle.id = index
+            let savedArticle = realm.object(ofType: ArticleObject.self, forPrimaryKey: modifiedArticle.articleUrl)
+            let saved = savedArticle != nil ? true : false
+            modifiedArticle.saved = saved
             return modifiedArticle
         })
         
         let viewModel = Articles.FetchArticles.ViewModel(headlines: modifiedArticles, totalResults: response?.totalResults ?? 0, currentPage: response?.currentPage ?? 1)
         return viewModel
     }
+    
+    func loadArticles() -> Results<ArticleObject> {
+        return realm.objects(ArticleObject.self)
+    }
+    
 }
 
 

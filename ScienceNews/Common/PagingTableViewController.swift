@@ -8,10 +8,14 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class PagingTableViewController: UITableViewController {
     
-    var articles = [Articles.Article]()
+    let realm = try! Realm()
+    let container = try! Container()
+    var savedArticles: Results<ArticleObject>?
+    var articles = [Article]()
     var isEndOfList = false
     var isLoading = true
     var totalResults: Int?
@@ -126,7 +130,7 @@ class PagingTableViewController: UITableViewController {
         }
     }
     
-    func updateArticleList(articleList: [Articles.Article], currentPage: Int, resultsAmount: Int) {
+    func updateArticleList(articleList: [Article], currentPage: Int, resultsAmount: Int) {
         refreshControl?.endRefreshing()
         if isLoading {
             isLoading = false
@@ -146,7 +150,7 @@ class PagingTableViewController: UITableViewController {
         }
     }
     
-    func updateHeadlines(articleList: [Articles.Article], currentPage: Int) {
+    func updateHeadlines(articleList: [Article], currentPage: Int) {
         isEndOfList = articleList.count < 15 ? true : false
         if currentPage == 1 {
             articles = articleList
@@ -159,14 +163,141 @@ class PagingTableViewController: UITableViewController {
     func fetchArticles(of page: Int = 1, with pageSize: Int = 15) {
         
     }
+    
+    
+    func saveArticle(article: Article){
+        do{
+            try container.write {
+                savedArticle in
+                savedArticle.add(article)
+            }
+        }catch{
+            print("Error saving category \(error)")
+        }
+    }
+    
+    func loadCategories(){
+        savedArticles = realm.objects(ArticleObject.self)
+    }
+    
+    func deleteCategory(article: ArticleObject){
+        do{
+//            try container.write {
+//                savedArticle in
+//                savedArticle.delete(article)
+//            }
+            try realm.write {
+                realm.delete(article)
+            }
+        }catch{
+            print("Error deleting category \(error)")
+        }
+        //we dont reload tableView, because SwipeCell already does it for us
+    }
+    
+    
+//    func saveArticle(article: Article){
+//        do{
+//            try realm.write {
+//                realm.add(article)
+//            }
+//        }catch{
+//            print("Error saving category \(error)")
+//        }
+//        loadCategories()
+//    }
+//
+//
+//    func deleteArticle(article: Article){
+//        do {
+//            try realm.write {
+//                realm.delete(article)
+//            }
+//        } catch {
+//            print("Error deleting category \(error)")
+//        }
+//        //we dont reload tableView, because SwipeCell already does it for us
+//    }
 
 }
 
 extension PagingTableViewController: ArticleCellDelegate {
     func articleButtonPress(at indexPath: IndexPath) {
         articles[indexPath.row].saved = !articles[indexPath.row].saved!
+        if articles[indexPath.row].saved! {
+            saveArticle(article: articles[indexPath.row])
+        }
+        else {
+            let articleToDelete = realm.object(ofType: ArticleObject.self, forPrimaryKey: articles[indexPath.row].articleUrl)
+            if let article = articleToDelete {
+                deleteCategory(article: article)
+            }
+        }
+        
+        
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     
+}
+
+
+public protocol Persistable {
+    associatedtype ManagedObject: RealmSwift.Object
+    init(managedObject: ManagedObject)
+    func managedObject() -> ManagedObject
+}
+
+
+extension Article: Persistable {
+
+    public init(managedObject: ArticleObject) {
+        title = managedObject.title
+        author = managedObject.author
+        description = managedObject.articleDescription
+        imageUrl = managedObject.imageUrl
+        publishDate = managedObject.publishDate
+        content = managedObject.content
+        articleUrl = managedObject.articleUrl
+        saved = managedObject.saved
+    }
+    public func managedObject() -> ArticleObject {
+        let savedArticle = ArticleObject()
+        savedArticle.title = title ?? ""
+        savedArticle.author = author ?? ""
+        savedArticle.articleDescription = description ?? ""
+        savedArticle.imageUrl = imageUrl ?? ""
+        savedArticle.publishDate = publishDate ?? ""
+        savedArticle.content = content ?? ""
+        savedArticle.articleUrl = articleUrl ?? ""
+        savedArticle.saved = saved ?? false
+        return savedArticle
+    }
+}
+
+public final class WriteTransaction {
+    private let realm: Realm
+    internal init(realm: Realm) {
+        self.realm = realm
+    }
+    public func add<T: Persistable>(_ value: T) {
+        realm.add(value.managedObject())
+    }
+}
+
+public final class Container {
+    private let realm: Realm
+    public convenience init() throws {
+        try self.init(realm: Realm())
+    }
+    internal init(realm: Realm) {
+        self.realm = realm
+    }
+    public func write(_ block: (WriteTransaction) throws -> Void)
+        throws {
+            let transaction = WriteTransaction(realm: realm)
+            try realm.write {
+                try block(transaction)
+            }
+    }
 }

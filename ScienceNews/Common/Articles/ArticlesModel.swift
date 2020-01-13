@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum Articles {
     // MARK: Use cases
@@ -29,7 +30,11 @@ enum Articles {
             var currentPage: Int
         }
     }
-    
+
+
+}
+
+
     struct Article: Codable {
         var title: String?
         var author: String?
@@ -37,10 +42,9 @@ enum Articles {
         var imageUrl: String?
         var publishDate: String?
         var content: String?
-        var id: Int?
         var articleUrl: String?
-        var saved: Bool?  
-        
+        var saved: Bool?
+
         private enum CodingKeys: String, CodingKey {
             case title
             case author
@@ -51,10 +55,35 @@ enum Articles {
             case articleUrl = "url"
         }
     }
+
+
+struct ArticleList: Codable {
+    var articles: [Article]?
+    var totalResults: Int?
+}
+
+class ArticleObject: Object {
+    @objc dynamic var title: String = ""
+    @objc dynamic var author: String = ""
+    @objc dynamic var articleDescription: String = ""
+    @objc dynamic var imageUrl: String = ""
+    @objc dynamic var publishDate: String = ""
+    @objc dynamic var content: String = ""
+    @objc dynamic var articleUrl: String = ""
+    @objc dynamic var saved: Bool = false
     
-    struct ArticleList: Codable {
-        var articles: [Article]?
-        var totalResults: Int?
+    override static func primaryKey() -> String? {
+        return "articleUrl"
     }
+//
+//    private enum CodingKeys: String, CodingKey {
+//        case title
+//        case author
+//        case articleDescription = "description"
+//        case imageUrl = "urlToImage"
+//        case publishDate = "publishedAt"
+//        case content
+//        case articleUrl = "url"
+//    }
 }
 
