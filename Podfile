@@ -7,5 +7,6 @@ target 'ScienceNews' do
 
   # Pods for ScienceNews
     pod 'Kingfisher', '~> 5.0'
+    pod 'RealmSwift'
     
 end
