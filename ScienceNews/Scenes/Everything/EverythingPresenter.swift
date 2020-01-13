@@ -14,18 +14,18 @@ import UIKit
 
 protocol EverythingPresentationLogic
 {
-  func presentSomething(response: Everything.Something.Response)
+  func presentEverything(response: Articles.FetchArticles.Response?)
 }
 
 class EverythingPresenter: EverythingPresentationLogic
 {
-  weak var viewController: EverythingDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Everything.Something.Response)
-  {
-    let viewModel = Everything.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    weak var viewController: EverythingDisplayLogic?
+    var worker = ArticlesWorker()
+    
+    // MARK: Present Everything
+    
+    func presentEverything(response: Articles.FetchArticles.Response?) {
+        let viewModel = worker.createArticlesViewModel(with: response)
+        viewController?.displayEverything(viewModel: viewModel)
+    }
 }

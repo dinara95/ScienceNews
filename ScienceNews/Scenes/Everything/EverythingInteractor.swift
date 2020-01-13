@@ -14,7 +14,7 @@ import UIKit
 
 protocol EverythingBusinessLogic
 {
-  func doSomething(request: Everything.Something.Request)
+  func fetchEverything(request: Articles.FetchArticles.Request)
 }
 
 protocol EverythingDataStore
@@ -24,18 +24,16 @@ protocol EverythingDataStore
 
 class EverythingInteractor: EverythingBusinessLogic, EverythingDataStore
 {
-  var presenter: EverythingPresentationLogic?
-  var worker: EverythingWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: Everything.Something.Request)
-  {
-    worker = EverythingWorker()
-    worker?.doSomeWork()
+    var presenter: EverythingPresentationLogic?
+    var worker: ArticlesWorker?
     
-    let response = Everything.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    // MARK: Do something
+    
+    func fetchEverything(request: Articles.FetchArticles.Request) {
+        worker = ArticlesWorker()
+        worker?.fetchArticles(with: request, completionHandler: { (response) in
+            self.presenter?.presentEverything(response: response)
+        })
+    }
 }
+

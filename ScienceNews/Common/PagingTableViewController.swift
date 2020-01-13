@@ -11,7 +11,7 @@ import Kingfisher
 
 class PagingTableViewController: UITableViewController {
     
-    var articles = [TopHeadlines.Article]()
+    var articles = [Articles.Article]()
     var isEndOfList = false
     var isLoading = true
     var totalResults: Int?
@@ -104,12 +104,13 @@ class PagingTableViewController: UITableViewController {
             self.isLoading = true
             DispatchQueue.global().async {
                 let page = self.articles.count / 15 + 1
-                self.fetchArticles(of: page)
+                print("PAGE", page)
+                self.fetchArticles(of: page, with: 15)
             }
         }
     }
     
-    func updateArticleList(articleList: [TopHeadlines.Article], currentPage: Int, resultsAmount: Int){
+    func updateArticleList(articleList: [Articles.Article], currentPage: Int, resultsAmount: Int){
         refreshControl?.endRefreshing()
         if isLoading {
             isLoading = false
@@ -124,7 +125,7 @@ class PagingTableViewController: UITableViewController {
         }
     }
     
-    func updateHeadlines(articleList: [TopHeadlines.Article]?, currentPage: Int) {
+    func updateHeadlines(articleList: [Articles.Article]?, currentPage: Int) {
         if let headlineList = articleList {
             isEndOfList = headlineList.count < 15 ? true : false
             if currentPage == 1 {

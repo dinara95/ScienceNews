@@ -22,7 +22,7 @@ class ArticleDetailsViewController: UIViewController, ArticleDetailsDisplayLogic
   var interactor: ArticleDetailsBusinessLogic?
   var router: (NSObjectProtocol & ArticleDetailsRoutingLogic & ArticleDetailsDataPassing)?
     
-    var selectedArticle: TopHeadlines.Article?
+    var selectedArticle: Articles.Article?
 
     @IBOutlet weak var articleTitle: UILabel!
     @IBOutlet weak var articleDescription: UILabel!

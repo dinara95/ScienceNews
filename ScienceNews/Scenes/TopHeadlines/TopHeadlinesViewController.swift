@@ -10,14 +10,11 @@ import UIKit
 import Kingfisher
 
 protocol TopHeadlinesDisplayLogic: class {
-    func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel)
+    func displayTopHeadlines(viewModel: Articles.FetchArticles.ViewModel)
 }
 
 class TopHeadlinesViewController: PagingTableViewController, TopHeadlinesDisplayLogic {
-    
-    
     var interactor: TopHeadlinesBusinessLogic?
-    var headlines = [TopHeadlines.Article]()
     
     // MARK: Object lifecycle
     
@@ -60,11 +57,12 @@ class TopHeadlinesViewController: PagingTableViewController, TopHeadlinesDisplay
     // MARK: Fetch Top Headlines
     
     override func fetchArticles(of page: Int = 1, with pageSize: Int = 15) {
-        let request = TopHeadlines.FetchTopHeadlines.Request(page: page, pageSize: pageSize)
+        let params = [URLQueryItem(name: "country", value: "us"), URLQueryItem(name: "category", value: "science")]
+        let request = Articles.FetchArticles.Request(url: "https://newsapi.org/v2/top-headlines?", params: params, page: page, pageSize: pageSize)
         interactor?.fetchTopHeadlines(request: request)
     }
     
-    func displayTopHeadlines(viewModel: TopHeadlines.FetchTopHeadlines.ViewModel) {
+    func displayTopHeadlines(viewModel: Articles.FetchArticles.ViewModel) {
         if let headlines = viewModel.headlines {
             updateArticleList(articleList: headlines, currentPage: viewModel.currentPage, resultsAmount: viewModel.totalResults)
         }

@@ -13,7 +13,7 @@
 import UIKit
 
 protocol TopHeadlinesBusinessLogic {
-    func fetchTopHeadlines(request: TopHeadlines.FetchTopHeadlines.Request)
+    func fetchTopHeadlines(request: Articles.FetchArticles.Request)
 }
 
 protocol TopHeadlinesDataStore {
@@ -22,13 +22,13 @@ protocol TopHeadlinesDataStore {
 
 class TopHeadlinesInteractor: TopHeadlinesBusinessLogic, TopHeadlinesDataStore {
     var presenter: TopHeadlinesPresentationLogic?
-    var worker: TopHeadlinesWorker?
+    var worker: ArticlesWorker?
   
     // MARK: Do something
   
-    func fetchTopHeadlines(request: TopHeadlines.FetchTopHeadlines.Request) {
-        worker = TopHeadlinesWorker()
-        worker?.fetchTopHeadlines(with: request, completionHandler: { (response) in
+    func fetchTopHeadlines(request: Articles.FetchArticles.Request) {
+        worker = ArticlesWorker()
+        worker?.fetchArticles(with: request, completionHandler: { (response) in
             self.presenter?.presentTopHeadlines(response: response)
         })
     }
