@@ -11,12 +11,11 @@ import Kingfisher
 
 class PagingTableViewController: UITableViewController {
     
-    var articles = [TopHeadlines.Article]()
+    var articles = [Articles.Article]()
     var isEndOfList = false
     var isLoading = true
     var totalResults: Int?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
@@ -29,18 +28,8 @@ class PagingTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! ArticleDetailsViewController
-        guard let indexPath = tableView.indexPathForSelectedRow else{fatalError("No indexPath")}
+        guard let indexPath = tableView.indexPathForSelectedRow else { fatalError("No indexPath") }
         destinationVC.selectedArticle = articles[indexPath.row]
-    }
-    
-    func registerNibCell(nibName: String, cellId: String){
-        let tableViewLoadingCellNib = UINib(nibName: nibName, bundle: nil)
-        tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: cellId)
-    }
-    
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        isLoading = true
-        fetchArticles()
     }
 
     // MARK: - Table view data source
@@ -52,7 +41,7 @@ class PagingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return articles.count
-        } else if section == 1 && !isEndOfList {
+        } else if section == 1 && !isEndOfList && !articles.isEmpty {
             return 1
         } else {
             return 0
@@ -79,7 +68,9 @@ class PagingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToArticle", sender: self)
+        if indexPath.section == 0 {
+            performSegue(withIdentifier: "goToArticle", sender: self)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -99,6 +90,16 @@ class PagingTableViewController: UITableViewController {
         }
     }
     
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        isLoading = true
+        fetchArticles()
+    }
+    
+    func registerNibCell(nibName: String, cellId: String){
+        let tableViewLoadingCellNib = UINib(nibName: nibName, bundle: nil)
+        tableView.register(tableViewLoadingCellNib, forCellReuseIdentifier: cellId)
+    }
+    
     func loadMoreData() {
         if !self.isLoading {
             self.isLoading = true
@@ -109,34 +110,37 @@ class PagingTableViewController: UITableViewController {
         }
     }
     
-    func updateArticleList(articleList: [TopHeadlines.Article], currentPage: Int, resultsAmount: Int){
+    func updateArticleList(articleList: [Articles.Article], currentPage: Int, resultsAmount: Int) {
         refreshControl?.endRefreshing()
         if isLoading {
             isLoading = false
             updateHeadlines(articleList: articleList, currentPage: currentPage)
         }
-        
-        if let results = totalResults, totalResults != resultsAmount{
+
+        if let results = totalResults, resultsAmount != 0, totalResults != resultsAmount{
             isLoading = true
-            fetchArticles(of: 1, with: (articles.count + abs(resultsAmount - results)) % 100)
+            let resultsDifference = resultsAmount - results
+            var pageSize = resultsDifference < 0 ? resultsAmount : articles.count + resultsDifference
+            if pageSize > 100 {
+                pageSize = 100
+            }
+            fetchArticles(of: 1, with: pageSize)
         } else {
             totalResults = resultsAmount
         }
     }
     
-    func updateHeadlines(articleList: [TopHeadlines.Article]?, currentPage: Int) {
-        if let headlineList = articleList {
-            isEndOfList = headlineList.count < 15 ? true : false
-            if currentPage == 1 {
-                articles = headlineList
-            } else {
-                articles.append(contentsOf: headlineList)
-            }
-            tableView.reloadData()
+    func updateHeadlines(articleList: [Articles.Article], currentPage: Int) {
+        isEndOfList = articleList.count < 15 ? true : false
+        if currentPage == 1 {
+            articles = articleList
+        } else {
+            articles.append(contentsOf: articleList)
         }
+        tableView.reloadData()
     }
     
-    func fetchArticles(of page: Int = 1, with pageSize: Int = 15){
+    func fetchArticles(of page: Int = 1, with pageSize: Int = 15) {
         
     }
 

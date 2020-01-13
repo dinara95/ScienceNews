@@ -13,51 +13,22 @@
 import UIKit
 
 protocol TopHeadlinesPresentationLogic {
-    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response?)
+    func presentTopHeadlines(response: Articles.FetchArticles.Response?)
 }
 
 class TopHeadlinesPresenter: TopHeadlinesPresentationLogic {
     weak var viewController: TopHeadlinesDisplayLogic?
+    var worker = ArticlesWorker()
 
     // MARK: Present Top Headlines
 
-    func presentTopHeadlines(response: TopHeadlines.FetchTopHeadlines.Response?) {
-        
-        let articles = response?.articles?.enumerated().map({ (index, article) -> TopHeadlines.Article in
-            var modifiedArticle = article
-            let date = article.publishDate?.asDate.stringForDate(withFormat: "dd.MMMM yyyy")
-            modifiedArticle.publishDate = date
-            modifiedArticle.id = index
-            return modifiedArticle
-        })
-
-        
-        let viewModel = TopHeadlines.FetchTopHeadlines.ViewModel(headlines: articles, totalResults: response?.totalResults ?? 0, currentPage: response?.currentPage ?? 1)
+    func presentTopHeadlines(response: Articles.FetchArticles.Response?) {
+        let viewModel = worker.createArticlesViewModel(with: response)
         viewController?.displayTopHeadlines(viewModel: viewModel)
     }
 }
 
 
-extension String {
-    var asDate: Date {
-        let formatter = DateFormatter()
-        formatter.timeZone = currentTimezone
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: self) ?? Date()
-    }
-}
-
-extension Date {
-    func stringForDate(withFormat dateFormat: String) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        dateFormatter.timeZone = currentTimezone
-        return dateFormatter.string(from: self)
-    }
-}
-
-
-let currentTimezone = NSTimeZone(abbreviation: "GMT+6:00") as TimeZone?
 
 
 
