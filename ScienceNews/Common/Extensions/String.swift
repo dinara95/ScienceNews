@@ -9,10 +9,11 @@
 import Foundation
 
 extension String {
-    var asDate: Date {
+    var asDate: Date? {
         let formatter = DateFormatter()
-        formatter.timeZone = currentTimezone
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: self) ?? Date()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = formatter.date(from: self)
+        return date ?? nil
     }
 }

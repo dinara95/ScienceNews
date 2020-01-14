@@ -9,4 +9,4 @@
 import Foundation
 
 
-let currentTimezone = NSTimeZone(abbreviation: "GMT+6:00") as TimeZone?
+let currentTimezone = NSTimeZone(abbreviation: "GMT+0:00") as TimeZone?

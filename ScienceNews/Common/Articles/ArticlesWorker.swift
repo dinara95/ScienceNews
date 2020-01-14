@@ -45,7 +45,7 @@ class ArticlesWorker {
     func createArticlesViewModel(with response: Articles.FetchArticles.Response?) -> Articles.FetchArticles.ViewModel {
         let modifiedArticles = response?.articles?.enumerated().map({ (index, article) -> Article in
             var modifiedArticle = article
-            let date = article.publishDate?.asDate.stringForDate(withFormat: "dd.MMMM yyyy")
+            let date = article.publishDate?.asDate?.stringForDate(withFormat: "dd.MMMM yyyy")
             modifiedArticle.publishDate = date
             let savedArticle = realm.object(ofType: ArticleObject.self, forPrimaryKey: modifiedArticle.articleUrl)
             let saved = savedArticle != nil ? true : false
