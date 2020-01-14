@@ -24,8 +24,10 @@ class TopHeadlinesInteractor: TopHeadlinesBusinessLogic {
   
     func fetchTopHeadlines(request: Articles.FetchArticles.Request) {
         worker = ArticlesWorker()
-        worker?.fetchArticles(with: request, completionHandler: { (response) in
+        DispatchQueue.global().async {
+            self.worker?.fetchArticles(with: request, completionHandler: { (response) in
             self.presenter?.presentTopHeadlines(response: response)
         })
+        }
     }
 }

@@ -24,3 +24,8 @@ struct API {
 
 
 let currentTimezone = NSTimeZone(abbreviation: "GMT+0:00") as TimeZone?
+
+
+enum FetchingError: Error {
+    case networkError(String)
+}

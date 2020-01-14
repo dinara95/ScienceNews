@@ -22,8 +22,8 @@ class ArticlesWorker {
         let urlRequest = URLRequest(url: components.url!)
         
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let dataObject = data else { return }
             do {
+                guard let dataObject = data else { throw FetchingError.networkError("") }
                 let decoder = JSONDecoder()
                 articleList = try decoder.decode(ArticleList.self, from: dataObject)
                 let response = Articles.FetchArticles.Response(articles: articleList.articles, totalResults: articleList.totalResults, currentPage: request.page)
@@ -60,6 +60,7 @@ class ArticlesWorker {
     }
     
 }
+
 
 
 

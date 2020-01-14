@@ -54,7 +54,7 @@ class PagingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return articles.count
-        } else if section == 1 && !isEndOfList && !articles.isEmpty {
+        } else if section == 1 && !isEndOfList {
             return 1
         } else {
             return 0
@@ -122,10 +122,8 @@ class PagingTableViewController: UITableViewController {
     func loadMoreData() {
         if !self.isLoading {
             self.isLoading = true
-            DispatchQueue.global().async {
-                let page = self.articles.count / 15 + 1
-                self.fetchArticles(of: page)
-            }
+            let page = self.articles.count / 15 + 1
+            fetchArticles(of: page)
         }
     }
     
