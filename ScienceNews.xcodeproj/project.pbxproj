@@ -21,12 +21,8 @@
 		D34C038F23CC4F2000CD5035 /* EverythingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C038923CC4F2000CD5035 /* EverythingInteractor.swift */; };
 		D34C03AF23CC667300CD5035 /* ArticlesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03AE23CC667300CD5035 /* ArticlesWorker.swift */; };
 		D34C03B123CC66C800CD5035 /* ArticlesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B023CC66C800CD5035 /* ArticlesModel.swift */; };
-		D34C03B923CCAC9600CD5035 /* SavedArticlesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B323CCAC9600CD5035 /* SavedArticlesPresenter.swift */; };
-		D34C03BA23CCAC9600CD5035 /* SavedArticlesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B423CCAC9600CD5035 /* SavedArticlesWorker.swift */; };
-		D34C03BB23CCAC9600CD5035 /* SavedArticlesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B523CCAC9600CD5035 /* SavedArticlesRouter.swift */; };
-		D34C03BC23CCAC9600CD5035 /* SavedArticlesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B623CCAC9600CD5035 /* SavedArticlesModels.swift */; };
 		D34C03BD23CCAC9600CD5035 /* SavedArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B723CCAC9600CD5035 /* SavedArticlesViewController.swift */; };
-		D34C03BE23CCAC9600CD5035 /* SavedArticlesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B823CCAC9600CD5035 /* SavedArticlesInteractor.swift */; };
+		D34C03C023CD39FF00CD5035 /* SavedArticlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03BF23CD39FF00CD5035 /* SavedArticlesTableViewController.swift */; };
 		D371865923CBAAA900E29C93 /* PagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D371865823CBAAA900E29C93 /* PagingTableViewController.swift */; };
 		D3DDE73923CAFAF00036B6CA /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */; };
 		D3DDE73A23CAFAF00036B6CA /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */; };
@@ -58,12 +54,8 @@
 		D34C038923CC4F2000CD5035 /* EverythingInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EverythingInteractor.swift; sourceTree = "<group>"; };
 		D34C03AE23CC667300CD5035 /* ArticlesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesWorker.swift; sourceTree = "<group>"; };
 		D34C03B023CC66C800CD5035 /* ArticlesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesModel.swift; sourceTree = "<group>"; };
-		D34C03B323CCAC9600CD5035 /* SavedArticlesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesPresenter.swift; sourceTree = "<group>"; };
-		D34C03B423CCAC9600CD5035 /* SavedArticlesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesWorker.swift; sourceTree = "<group>"; };
-		D34C03B523CCAC9600CD5035 /* SavedArticlesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesRouter.swift; sourceTree = "<group>"; };
-		D34C03B623CCAC9600CD5035 /* SavedArticlesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesModels.swift; sourceTree = "<group>"; };
 		D34C03B723CCAC9600CD5035 /* SavedArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesViewController.swift; sourceTree = "<group>"; };
-		D34C03B823CCAC9600CD5035 /* SavedArticlesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesInteractor.swift; sourceTree = "<group>"; };
+		D34C03BF23CD39FF00CD5035 /* SavedArticlesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesTableViewController.swift; sourceTree = "<group>"; };
 		D371865823CBAAA900E29C93 /* PagingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingTableViewController.swift; sourceTree = "<group>"; };
 		D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
@@ -180,12 +172,8 @@
 		D34C03B223CCAC0200CD5035 /* SavedArticles */ = {
 			isa = PBXGroup;
 			children = (
-				D34C03B323CCAC9600CD5035 /* SavedArticlesPresenter.swift */,
-				D34C03B423CCAC9600CD5035 /* SavedArticlesWorker.swift */,
-				D34C03B523CCAC9600CD5035 /* SavedArticlesRouter.swift */,
-				D34C03B623CCAC9600CD5035 /* SavedArticlesModels.swift */,
 				D34C03B723CCAC9600CD5035 /* SavedArticlesViewController.swift */,
-				D34C03B823CCAC9600CD5035 /* SavedArticlesInteractor.swift */,
+				D34C03BF23CD39FF00CD5035 /* SavedArticlesTableViewController.swift */,
 			);
 			path = SavedArticles;
 			sourceTree = "<group>";
@@ -333,12 +321,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D34C03BC23CCAC9600CD5035 /* SavedArticlesModels.swift in Sources */,
 				D3DDE75323CB613A0036B6CA /* ArticleDetailsWorker.swift in Sources */,
 				D34C038E23CC4F2000CD5035 /* EverythingViewController.swift in Sources */,
+				D34C03C023CD39FF00CD5035 /* SavedArticlesTableViewController.swift in Sources */,
 				D34C03AF23CC667300CD5035 /* ArticlesWorker.swift in Sources */,
-				D34C03B923CCAC9600CD5035 /* SavedArticlesPresenter.swift in Sources */,
-				D34C03BA23CCAC9600CD5035 /* SavedArticlesWorker.swift in Sources */,
 				D31072E223C9C71A00BE86DD /* TopHeadlinesPresenter.swift in Sources */,
 				D3DDE75523CB613A0036B6CA /* ArticleDetailsModels.swift in Sources */,
 				D3DDE75223CB613A0036B6CA /* ArticleDetailsPresenter.swift in Sources */,
@@ -346,7 +332,6 @@
 				D34C038F23CC4F2000CD5035 /* EverythingInteractor.swift in Sources */,
 				D371865923CBAAA900E29C93 /* PagingTableViewController.swift in Sources */,
 				D3DDE75723CB613A0036B6CA /* ArticleDetailsInteractor.swift in Sources */,
-				D34C03BE23CCAC9600CD5035 /* SavedArticlesInteractor.swift in Sources */,
 				D31072C923C9C58200BE86DD /* AppDelegate.swift in Sources */,
 				D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */,
 				D34C03B123CC66C800CD5035 /* ArticlesModel.swift in Sources */,
@@ -354,7 +339,6 @@
 				D3DDE75623CB613A0036B6CA /* ArticleDetailsViewController.swift in Sources */,
 				D3DDE73923CAFAF00036B6CA /* LoadingCell.swift in Sources */,
 				D34C03BD23CCAC9600CD5035 /* SavedArticlesViewController.swift in Sources */,
-				D34C03BB23CCAC9600CD5035 /* SavedArticlesRouter.swift in Sources */,
 				D31072EA23C9EA8300BE86DD /* ArticleCell.swift in Sources */,
 				D34C038A23CC4F2000CD5035 /* EverythingPresenter.swift in Sources */,
 			);

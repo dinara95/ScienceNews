@@ -24,7 +24,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEK-zJ-C15" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="675"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NmF-Ce-Hp4">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NmF-Ce-Hp4">
                                                 <rect key="frame" x="25" y="25" width="364" height="36"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
@@ -39,7 +39,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="r6s-6x-9gm">
                                                 <rect key="frame" x="25" y="121.5" width="364" height="18"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tgu-Zt-H6k">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tgu-Zt-H6k">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="18"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                         <nil key="textColor"/>
@@ -123,27 +123,6 @@
             </objects>
             <point key="canvasLocation" x="7419" y="748"/>
         </scene>
-        <!--Saved Articles View Controller-->
-        <scene sceneID="AMs-yS-RIO">
-            <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="Y1X-n8-O1C" customClass="SavedArticlesViewController" customModule="ScienceNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pvm-cZ-SgE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <outlet property="dataSource" destination="Y1X-n8-O1C" id="Lbw-Vd-cWB"/>
-                            <outlet property="delegate" destination="Y1X-n8-O1C" id="heg-dg-bmK"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="vYf-1s-2f4"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="alj-Md-Qek" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7419" y="47"/>
-        </scene>
         <!--Headlines-->
         <scene sceneID="9fl-3j-95T">
             <objects>
@@ -171,16 +150,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="S87-cU-Zsz">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S87-cU-Zsz" id="Gbr-N6-8GN">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="pRD-lk-A4Y" id="9dl-Jn-epr"/>
                             <outlet property="delegate" destination="pRD-lk-A4Y" id="pac-LG-3VP"/>
@@ -189,12 +158,25 @@
                     <navigationItem key="navigationItem" title="Top Headlines" id="E6c-yg-R94"/>
                     <connections>
                         <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="LEw-RU-iJw"/>
-                        <segue destination="Y1X-n8-O1C" kind="show" identifier="goToSavedArticles" id="3j0-aT-TyS"/>
+                        <segue destination="qph-yp-GeE" kind="show" identifier="goToSavedArticles" id="Ci9-u9-dhD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Coi-3L-NtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6435" y="42"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="t0l-Ny-cwY">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="qph-yp-GeE" customClass="SavedArticlesTableViewController" customModule="ScienceNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="1yM-yc-JLO"/>
+                    <connections>
+                        <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="bBs-9O-RVA"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yGr-pX-vi6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7354" y="42"/>
         </scene>
         <!--Everything-->
         <scene sceneID="8kp-kz-SLh">
@@ -212,7 +194,7 @@
                     <navigationItem key="navigationItem" title="Everything" id="0A7-ln-Kr4"/>
                     <connections>
                         <segue destination="G6f-vj-QMy" kind="show" identifier="goToArticle" id="53M-cR-v5I"/>
-                        <segue destination="Y1X-n8-O1C" kind="show" identifier="goToSavedArticles" id="gj8-Ql-U6a"/>
+                        <segue destination="qph-yp-GeE" kind="show" identifier="goToSavedArticles" id="PBU-Fb-Mnd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PyW-Pc-JKX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -264,7 +246,7 @@
         <image name="trends" width="19" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3j0-aT-TyS"/>
-        <segue reference="vYf-1s-2f4"/>
+        <segue reference="PBU-Fb-Mnd"/>
+        <segue reference="bBs-9O-RVA"/>
     </inferredMetricsTieBreakers>
 </document>
