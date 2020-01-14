@@ -57,8 +57,7 @@ class EverythingViewController: PagingTableViewController, EverythingDisplayLogi
     // MARK: Fetch Top Headlines
     
     override func fetchArticles(of page: Int = 1, with pageSize: Int = 15) {
-        let params = [URLQueryItem(name: "q", value: "science"), URLQueryItem(name: "language", value: "en")]
-        let request = Articles.FetchArticles.Request(url: "https://newsapi.org/v2/everything?", params: params, page: page, pageSize: pageSize)
+        let request = Articles.FetchArticles.Request(url: API.Everything.url, params: API.Everything.params, page: page, pageSize: pageSize)
         interactor?.fetchEverything(request: request)
     }
     

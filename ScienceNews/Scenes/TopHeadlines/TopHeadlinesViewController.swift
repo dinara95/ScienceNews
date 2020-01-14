@@ -55,8 +55,7 @@ class TopHeadlinesViewController: PagingTableViewController, TopHeadlinesDisplay
     // MARK: Fetch Top Headlines
     
     override func fetchArticles(of page: Int = 1, with pageSize: Int = 15) {
-        let params = [URLQueryItem(name: "country", value: "us"), URLQueryItem(name: "category", value: "science")]
-        let request = Articles.FetchArticles.Request(url: "https://newsapi.org/v2/top-headlines?", params: params, page: page, pageSize: pageSize)
+        let request = Articles.FetchArticles.Request(url: API.TopHeadlines.url, params: API.TopHeadlines.params, page: page, pageSize: pageSize)
         interactor?.fetchTopHeadlines(request: request)
     }
     

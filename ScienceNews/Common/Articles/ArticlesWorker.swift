@@ -11,14 +11,12 @@ import RealmSwift
 
 class ArticlesWorker {
     let realm = try! Realm()
-    let MY_KEY = "4b2e6714d8dc4d5b941705bea49a6404"
-    let AVIATA_KEY = "e65ee0938a2a43ebb15923b48faed18d"
 
     func fetchArticles(with request: Articles.FetchArticles.Request, completionHandler: @escaping (Articles.FetchArticles.Response?) -> Void) {
         var articleList = ArticleList(articles: [Article](), totalResults: 0)
         
         var components = URLComponents(string: request.url)!
-        components.queryItems = [URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)"), URLQueryItem(name: "apiKey", value: MY_KEY)]
+        components.queryItems = [URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)"), URLQueryItem(name: "apiKey", value: API.MY_KEY)]
         components.queryItems?.append(contentsOf: request.params)
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         let urlRequest = URLRequest(url: components.url!)
