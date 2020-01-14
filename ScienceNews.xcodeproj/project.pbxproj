@@ -22,6 +22,12 @@
 		D34C03AF23CC667300CD5035 /* ArticlesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03AE23CC667300CD5035 /* ArticlesWorker.swift */; };
 		D34C03B123CC66C800CD5035 /* ArticlesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03B023CC66C800CD5035 /* ArticlesModel.swift */; };
 		D34C03C023CD39FF00CD5035 /* SavedArticlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03BF23CD39FF00CD5035 /* SavedArticlesTableViewController.swift */; };
+		D34C03C423CD4AC900CD5035 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03C323CD4AC900CD5035 /* String.swift */; };
+		D34C03C623CD4AEA00CD5035 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03C523CD4AEA00CD5035 /* Date.swift */; };
+		D34C03C923CD4B2600CD5035 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03C823CD4B2600CD5035 /* AppConstants.swift */; };
+		D34C03CD23CD4BDA00CD5035 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03CC23CD4BDA00CD5035 /* Article.swift */; };
+		D34C03D023CD4D2200CD5035 /* WriteTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03CF23CD4D2200CD5035 /* WriteTransaction.swift */; };
+		D34C03D223CD4D3D00CD5035 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34C03D123CD4D3D00CD5035 /* Container.swift */; };
 		D371865923CBAAA900E29C93 /* PagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D371865823CBAAA900E29C93 /* PagingTableViewController.swift */; };
 		D3DDE73923CAFAF00036B6CA /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */; };
 		D3DDE73A23CAFAF00036B6CA /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */; };
@@ -49,8 +55,14 @@
 		D34C03AE23CC667300CD5035 /* ArticlesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesWorker.swift; sourceTree = "<group>"; };
 		D34C03B023CC66C800CD5035 /* ArticlesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesModel.swift; sourceTree = "<group>"; };
 		D34C03BF23CD39FF00CD5035 /* SavedArticlesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesTableViewController.swift; sourceTree = "<group>"; };
+		D34C03C323CD4AC900CD5035 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D34C03C523CD4AEA00CD5035 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		D34C03C823CD4B2600CD5035 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		D34C03CC23CD4BDA00CD5035 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		D34C03CF23CD4D2200CD5035 /* WriteTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTransaction.swift; sourceTree = "<group>"; };
+		D34C03D123CD4D3D00CD5035 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		D371865823CBAAA900E29C93 /* PagingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PagingTableViewController.swift; path = ../PagingTableViewController.swift; sourceTree = "<group>"; };
-		D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoadingCell.swift; path = ../LoadingCell.swift; sourceTree = "<group>"; };
+		D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		D3DDE74923CB32420036B6CA /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
 		D3DDE75023CB613A0036B6CA /* ArticleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsViewController.swift; sourceTree = "<group>"; };
@@ -168,20 +180,50 @@
 		D34C03C123CD47AD00CD5035 /* PagingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D31072E923C9EA8300BE86DD /* ArticleCell.swift */,
-				D3DDE74923CB32420036B6CA /* ArticleCell.xib */,
-				D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */,
-				D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */,
+				D34C03D323CD4F9500CD5035 /* Views */,
 				D371865823CBAAA900E29C93 /* PagingTableViewController.swift */,
 			);
 			path = PagingViewController;
 			sourceTree = "<group>";
 		};
+		D34C03C223CD4A9B00CD5035 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D34C03C323CD4AC900CD5035 /* String.swift */,
+				D34C03C523CD4AEA00CD5035 /* Date.swift */,
+				D34C03CC23CD4BDA00CD5035 /* Article.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D34C03CE23CD4CB600CD5035 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				D34C03CF23CD4D2200CD5035 /* WriteTransaction.swift */,
+				D34C03D123CD4D3D00CD5035 /* Container.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		D34C03D323CD4F9500CD5035 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D31072E923C9EA8300BE86DD /* ArticleCell.swift */,
+				D3DDE74923CB32420036B6CA /* ArticleCell.xib */,
+				D3DDE73723CAFAF00036B6CA /* LoadingCell.swift */,
+				D3DDE73823CAFAF00036B6CA /* LoadingCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D3DDE73623CAFACA0036B6CA /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D34C03CE23CD4CB600CD5035 /* Realm */,
+				D34C03C223CD4A9B00CD5035 /* Extensions */,
 				D34C03C123CD47AD00CD5035 /* PagingViewController */,
 				D34C03AD23CC665600CD5035 /* Articles */,
+				D34C03C823CD4B2600CD5035 /* AppConstants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -312,17 +354,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				D34C038E23CC4F2000CD5035 /* EverythingViewController.swift in Sources */,
+				D34C03C923CD4B2600CD5035 /* AppConstants.swift in Sources */,
 				D34C03C023CD39FF00CD5035 /* SavedArticlesTableViewController.swift in Sources */,
 				D34C03AF23CC667300CD5035 /* ArticlesWorker.swift in Sources */,
+				D34C03C623CD4AEA00CD5035 /* Date.swift in Sources */,
 				D31072E223C9C71A00BE86DD /* TopHeadlinesPresenter.swift in Sources */,
+				D34C03D023CD4D2200CD5035 /* WriteTransaction.swift in Sources */,
 				D31072E623C9C71A00BE86DD /* TopHeadlinesViewController.swift in Sources */,
 				D34C038F23CC4F2000CD5035 /* EverythingInteractor.swift in Sources */,
 				D371865923CBAAA900E29C93 /* PagingTableViewController.swift in Sources */,
 				D31072C923C9C58200BE86DD /* AppDelegate.swift in Sources */,
+				D34C03CD23CD4BDA00CD5035 /* Article.swift in Sources */,
 				D31072E723C9C71A00BE86DD /* TopHeadlinesInteractor.swift in Sources */,
 				D34C03B123CC66C800CD5035 /* ArticlesModel.swift in Sources */,
 				D3DDE75623CB613A0036B6CA /* ArticleDetailsViewController.swift in Sources */,
 				D3DDE73923CAFAF00036B6CA /* LoadingCell.swift in Sources */,
+				D34C03C423CD4AC900CD5035 /* String.swift in Sources */,
+				D34C03D223CD4D3D00CD5035 /* Container.swift in Sources */,
 				D31072EA23C9EA8300BE86DD /* ArticleCell.swift in Sources */,
 				D34C038A23CC4F2000CD5035 /* EverythingPresenter.swift in Sources */,
 			);

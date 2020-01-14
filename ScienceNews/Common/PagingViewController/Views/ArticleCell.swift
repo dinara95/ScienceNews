@@ -26,6 +26,7 @@ class ArticleCell: UITableViewCell {
     @IBAction func onButtonPress(_ sender: UIButton) {
         delegate?.articleButtonPress(at: indexPath)
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         articleImg.layer.cornerRadius = 10

@@ -75,15 +75,6 @@ class ArticleObject: Object {
     override static func primaryKey() -> String? {
         return "articleUrl"
     }
-//
-//    private enum CodingKeys: String, CodingKey {
-//        case title
-//        case author
-//        case articleDescription = "description"
-//        case imageUrl = "urlToImage"
-//        case publishDate = "publishedAt"
-//        case content
-//        case articleUrl = "url"
-//    }
 }
+
 

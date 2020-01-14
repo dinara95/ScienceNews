@@ -66,23 +66,7 @@ class ArticlesWorker {
 
 
 
-extension String {
-    var asDate: Date {
-        let formatter = DateFormatter()
-        formatter.timeZone = currentTimezone
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: self) ?? Date()
-    }
-}
-
-extension Date {
-    func stringForDate(withFormat dateFormat: String) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        dateFormatter.timeZone = currentTimezone
-        return dateFormatter.string(from: self)
-    }
-}
 
 
-let currentTimezone = NSTimeZone(abbreviation: "GMT+6:00") as TimeZone?
+
+
