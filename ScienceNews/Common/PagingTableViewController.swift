@@ -111,7 +111,9 @@ class PagingTableViewController: UITableViewController {
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         isLoading = true
-        fetchArticles()
+        DispatchQueue.global().async {
+            self.fetchArticles()
+        }
     }
     
     func registerNibCell(nibName: String, cellId: String){
@@ -122,8 +124,10 @@ class PagingTableViewController: UITableViewController {
     func loadMoreData() {
         if !self.isLoading {
             self.isLoading = true
-            let page = self.articles.count / 15 + 1
-            fetchArticles(of: page)
+            DispatchQueue.global().async {
+                let page = self.articles.count / 15 + 1
+                self.fetchArticles(of: page)
+            }
         }
     }
     

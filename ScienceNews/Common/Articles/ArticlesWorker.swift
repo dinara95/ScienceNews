@@ -16,7 +16,7 @@ class ArticlesWorker {
         var articleList = ArticleList(articles: [Article](), totalResults: 0)
         
         var components = URLComponents(string: request.url)!
-        components.queryItems = [URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)"), URLQueryItem(name: "apiKey", value: API.MY_KEY)]
+        components.queryItems = [URLQueryItem(name: "pageSize", value: "\(request.pageSize)"), URLQueryItem(name: "page", value: "\(request.page)"), URLQueryItem(name: "apiKey", value: API.KEY)]
         components.queryItems?.append(contentsOf: request.params)
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         let urlRequest = URLRequest(url: components.url!)

@@ -132,10 +132,10 @@
 		D31072DA23C9C6D800BE86DD /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				D34C03B223CCAC0200CD5035 /* SavedArticles */,
 				D31072DB23C9C6E000BE86DD /* TopHeadlines */,
 				D34C038323CC4EF300CD5035 /* Everything */,
 				D3DDE74B23CB61100036B6CA /* ArticleDetails */,
+				D34C03B223CCAC0200CD5035 /* SavedArticles */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";

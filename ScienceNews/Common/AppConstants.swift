@@ -19,7 +19,7 @@ struct API {
         static let params = [URLQueryItem(name: "q", value: "science"), URLQueryItem(name: "language", value: "en")]
     }
     static let KEY = "e65ee0938a2a43ebb15923b48faed18d"
-    static let MY_KEY = "4b2e6714d8dc4d5b941705bea49a6404"
+    static let SPARE_KEY = "4b2e6714d8dc4d5b941705bea49a6404"
 }
 
 
